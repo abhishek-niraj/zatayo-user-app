@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:zatayo/view/feed_page/screen/feed_screen.dart';
 import 'package:zatayo/view/login/screen/enter_phone_number_screen.dart';
 import 'package:zatayo/view/login/screen/user_name_screen.dart';
 import 'package:zatayo/view/login/screen/verify_otp_screen.dart';
@@ -22,7 +23,10 @@ class AppRouter {
       name: 'user-name-screen',
         builder: (context,state) =>  UserNameScreen()
       ),
-
+      GoRoute(path: '/feed-page',
+          name: 'feed-page',
+          builder: (context,state) =>  HomeV2()
+      ),
     ],
   );
 }

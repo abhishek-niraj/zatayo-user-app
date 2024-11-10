@@ -122,6 +122,10 @@ class UserNameScreen extends StatelessWidget {
                                         bodyRequest: bodyRequest,
                                       ));
                                 }
+
+                                context.push(
+                                  '/feed-page',
+                                );
                               },
                             ),
                           ),
