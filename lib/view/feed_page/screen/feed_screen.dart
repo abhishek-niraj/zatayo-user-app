@@ -3,9 +3,12 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:zatayo/constant/app_color.dart';
 
 import '../../common_widget/common_text_widget.dart';
+import '../../fitness/screen/fitness_screen.dart';
+import '../../sports/screen/sports_screen.dart';
 
 class HomeV2 extends StatefulWidget {
   const HomeV2({super.key});
@@ -67,14 +70,14 @@ class _HomeV2State extends State<HomeV2> {
           // Animate to the selected page
           _pageController.animateToPage(
             index,
-            duration: Duration(milliseconds: 1),
+            duration: const Duration(milliseconds: 1),
             curve: Curves.easeInOut,
           );
         },
       ),
       body: PageView(
         controller: _pageController,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         onPageChanged: (index) {
           setState(() {
             _selectedPageIndex = index;
@@ -82,9 +85,9 @@ class _HomeV2State extends State<HomeV2> {
         },
         children: [
           HomePage(),
-          Center(child: Text('Fitness Page')),
+          FitnessScreen(),
           Center(child: Text('Scan Page')),
-          Center(child: Text('Sports Page')),
+          SportsScreen(),
           Center(child: Text('Profile Page')),
         ],
       ),
@@ -150,14 +153,16 @@ class HomePage extends StatelessWidget {
                     child: Stack(
                       children: [
                         Positioned(
-                            left: 0,
-                            right: 0,
-                            top: 0,
-                            bottom: 0,
-                            child: Icon(Icons.notifications_none_outlined,
+                          left: 0,
+                          right: 0,
+                          top: 0,
+                          bottom: 0,
+                          child: Icon(
+                            Icons.notifications_none_outlined,
                             size: 27,
-                              color: Color(0xFFF5F5F5),
-                            ),),
+                            color: Color(0xFFF5F5F5),
+                          ),
+                        ),
                         Positioned(
                           left: 25,
                           top: 15,
@@ -282,8 +287,8 @@ class HomePage extends StatelessWidget {
                                           height: 92,
                                           decoration: const ShapeDecoration(
                                             image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "https://via.placeholder.com/92x92"),
+                                              image: AssetImage(
+                                                  "assets/images/plan.png"),
                                               fit: BoxFit.fill,
                                             ),
                                             shape: OvalBorder(),
@@ -396,8 +401,8 @@ class HomePage extends StatelessWidget {
                                           height: 92,
                                           decoration: const ShapeDecoration(
                                             image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "https://via.placeholder.com/92x92"),
+                                              image: AssetImage(
+                                                  "assets/images/plan.png"),
                                               fit: BoxFit.fill,
                                             ),
                                             shape: OvalBorder(),
@@ -703,117 +708,151 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const CommonTextWidget(
-                          text: "Explore Zatayo",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                          letterSpacing: -0.3,
-                        ),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        Container(
-                          height: 116,
-                          decoration: ShapeDecoration(
-                            color: Colors.white.withOpacity(0.25),
-                            shape: RoundedRectangleBorder(
-                              side:
-                                  BorderSide(width: 0.10, color: Colors.white),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            shadows: [
-                              BoxShadow(
-                                color: Color(0x1E18274B),
-                                blurRadius: 6.41,
-                                offset: Offset(0, 2.85),
-                                spreadRadius: -2.14,
-                              ),
-                              BoxShadow(
-                                color: Color(0x3F000000),
-                                blurRadius: 1.42,
-                                offset: Offset(0, 1.42),
-                                spreadRadius: 0,
-                              )
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 116,
-                          decoration: ShapeDecoration(
-                            color: Colors.white.withOpacity(0.25),
-                            shape: RoundedRectangleBorder(
-                              side:
-                                  BorderSide(width: 0.10, color: Colors.white),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            shadows: [
-                              BoxShadow(
-                                color: Color(0x1E18274B),
-                                blurRadius: 6.41,
-                                offset: Offset(0, 2.85),
-                                spreadRadius: -2.14,
-                              ),
-                              BoxShadow(
-                                color: Color(0x3F000000),
-                                blurRadius: 1.42,
-                                offset: Offset(0, 1.42),
-                                spreadRadius: 0,
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
+                /******************** Top Fitness gym ********************/
+                Column(
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CommonTextWidget(
+                              text: "Top Fitness Center in your Area",
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                          CommonTextWidget(
+                            text: "See All",
+                            color: AppColor.kSecondaryButtonColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          )
+                        ],
+                      ),
+                    ),
                     SizedBox(
-                      width: 20,
+                      height: 20,
                     ),
-                    Text(
-                      "Top Fitness Center in your Area",
-                      style: TextStyle(fontSize: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        width: double.infinity,
+                        height: 180,
+                        decoration: ShapeDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage(
+                                "assets/images/top_fitness_1.png"),
+                            fit: BoxFit.fill,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CommonTextWidget(text: "Planet Fitness and Gym",
+                          fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.star,
+                              color: Colors.orange,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              CommonTextWidget(text: '4.5')
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.location_on_outlined,
+                          size: 30,),
+                          CommonTextWidget(text: "California, New York",
+                            fontWeight: FontWeight.w400,
+                          )
+                        ],
+                      ),
+                    )
+
                   ],
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Container(
-                    width: double.infinity,
-                    height: 180,
-                    decoration: ShapeDecoration(
-                      image: DecorationImage(
-                        image:
-                            NetworkImage("https://via.placeholder.com/327x180"),
-                        fit: BoxFit.fill,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        width: double.infinity,
+                        height: 180,
+                        decoration: ShapeDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage(
+                                "assets/images/top_fitness_2.png"),
+                            fit: BoxFit.fill,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CommonTextWidget(text: "Planet Fitness and Gym",
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.star,
+                                color: Colors.orange,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              CommonTextWidget(text: '4.5')
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(Icons.location_on_outlined,
+                            size: 30,),
+                          CommonTextWidget(text: "California, New York",
+                            fontWeight: FontWeight.w400,
+                          )
+                        ],
+                      ),
+                    )
+
+                  ],
                 ),
+                /******************** Top Fitness gym ********************/
+
                 SizedBox(
                   height: 20,
                 ),
@@ -841,10 +880,349 @@ class HomePage extends StatelessWidget {
                       )
                     ],
                   ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      CommonTextWidget(text: "Transform"),
+                      Image.asset('assets/images/loss_weight.png'),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CommonTextWidget(text: 'Before '),
+                          SizedBox(width: 60,),
+                          CommonTextWidget(text: 'After ')
+                        ],
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              child: CommonTextWidget(text: 'Transform yourself today for'
+                                  ' just ₹ 699 – see the difference tomorrow!',
+                                  textAlign: TextAlign.center
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
+                Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CommonTextWidget(
+                          text: "Explore Zatayo",
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                          letterSpacing: -0.3,
+                        ),
+                        const SizedBox(
+                          height: 22,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 325,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 7,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                width: 200,
+                                height: 307,
+                                decoration: ShapeDecoration(
+                                  color: Colors.white.withOpacity(0.25),
+                                  shape: RoundedRectangleBorder(
+                                    side: const BorderSide(
+                                        width: 0.10, color: Colors.white),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  shadows: [
+                                    BoxShadow(
+                                      color: Color(0x1E18274B),
+                                      blurRadius: 6.41,
+                                      offset: Offset(0, 2.85),
+                                      spreadRadius: -2.14,
+                                    ),
+                                    BoxShadow(
+                                      color: Color(0x3F000000),
+                                      blurRadius: 1.42,
+                                      offset: Offset(0, 1.42),
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 13,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 13),
+                                      child: Container(
+                                        width: 200,
+                                        height: 158,
+                                        decoration: ShapeDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/plan.png"),
+                                            fit: BoxFit.fill,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(7.94),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      child: Column(
+                                        children: [
+                                          CommonTextWidget(
+                                            text: "Jatayu Home",
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 20,
+                                            letterSpacing: -0.3,
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          CommonTextWidget(
+                                            text:
+                                                "Unlimited access to group classes, all gyms"
+                                                " and at-home workouts",
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Container(
+                                            width: 200,
+                                            decoration: ShapeDecoration(
+                                              shape: RoundedRectangleBorder(
+                                                side: BorderSide(
+                                                  width: 0.70,
+                                                  strokeAlign: BorderSide
+                                                      .strokeAlignCenter,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              CommonTextWidget(
+                                                text: "₹ 1450/month ",
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 12,
+                                              ),
+                                              SizedBox(
+                                                width: 9,
+                                              ),
+                                              Expanded(
+                                                child: CommonTextWidget(
+                                                  text: "Ownards",
+                                                  fontWeight: FontWeight.w300,
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const SizedBox(
+                                width: 10,
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                       Colors.transparent,
+                        Color(0xFF381004),
+
+                      ],
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 50),
+                    child: Column(
+                      children: [
+                        CommonTextWidget(text: "Unleash",
+                        fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        CommonTextWidget(text: "Your fitness",
+                        fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        CommonTextWidget(text: "Journey today",
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                        ),
+
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: StaggeredGrid.count(
+                        crossAxisCount: 4,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        children:  [
+                          StaggeredGridTile.count(
+                            crossAxisCellCount: 2,
+                            mainAxisCellCount: 2,
+                            child: Container(
+                              decoration: ShapeDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/group_4.png"),
+                                  fit: BoxFit.fill,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(3),
+                                ),
+                              ),
+                            ),
+
+                          ),
+                          StaggeredGridTile.count(
+                            crossAxisCellCount: 2,
+                            mainAxisCellCount: 3,
+                            child: Container(
+                              decoration: ShapeDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/group_3.png"),
+                                  fit: BoxFit.fill,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(3),
+                                ),
+                              ),
+                            ),
+
+                          ),
+                          StaggeredGridTile.count(
+                            crossAxisCellCount: 2,
+                            mainAxisCellCount: 2,
+                            child: Container(
+                              decoration: ShapeDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/plan.png"),
+                                  fit: BoxFit.fill,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(3),
+                                ),
+                              ),
+                            ),
+
+                          ),
+                          StaggeredGridTile.count(
+                            crossAxisCellCount: 2,
+                            mainAxisCellCount: 2,
+                            child: Container(
+                              decoration: ShapeDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/group.png"),
+                                  fit: BoxFit.fill,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(3),
+                                ),
+                              ),
+                            ),
+
+                          ),
+                          StaggeredGridTile.count(
+                            crossAxisCellCount: 2,
+                            mainAxisCellCount: 2,
+                            child: Container(
+                              decoration: ShapeDecoration(
+                                image: const DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/group_1.png"),
+                                  fit: BoxFit.fill,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(3),
+                                ),
+                              ),
+                            ),
+
+                          ),
+                        ],
+                      ),
+                    ),
+
+                      ],
+                    ),
+                  ),
+                ),
+
+
+
+
               ],
             ),
           ),
@@ -854,9 +1232,3 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class FitnessPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Fitness Page'));
-  }
-}

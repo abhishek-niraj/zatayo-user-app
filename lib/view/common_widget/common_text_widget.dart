@@ -7,6 +7,7 @@ class CommonTextWidget extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final double letterSpacing;
+  final TextAlign textAlign; // Add TextAlign parameter
 
   const CommonTextWidget({
     super.key,
@@ -15,12 +16,15 @@ class CommonTextWidget extends StatelessWidget {
     this.fontSize = 16,
     this.fontWeight = FontWeight.w400,
     this.letterSpacing = -0.3,
+    this.textAlign = TextAlign.start, // Default alignment is TextAlign.start
+
   });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: textAlign,
       style: GoogleFonts.workSans(
         textStyle: TextStyle(
           color: color,
