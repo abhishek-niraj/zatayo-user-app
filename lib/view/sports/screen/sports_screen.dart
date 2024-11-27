@@ -16,86 +16,84 @@ class _SportsScreenState extends State<SportsScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 44,
           ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Good Morning ',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF818898),
+                        fontSize: 14,
+                        fontFamily: 'Plus Jakarta Sans',
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: -0.28,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Hi, Abhishek Niraj !',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFFD3D1D8),
+                        fontSize: 18,
+                        fontFamily: 'Plus Jakarta Sans',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  width: 48,
+                  height: 48,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(width: 1, color: Color(0xFFDFE1E7)),
+                      borderRadius: BorderRadius.circular(48),
+                    ),
+                  ),
+                  child: Stack(
                     children: [
-                      Text(
-                        'Good Morning ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFF818898),
-                          fontSize: 14,
-                          fontFamily: 'Plus Jakarta Sans',
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: -0.28,
+                      const Positioned(
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                        child: Icon(
+                          Icons.notifications_none_outlined,
+                          size: 27,
+                          color: Color(0xFFF5F5F5),
                         ),
                       ),
-                      SizedBox(height: 4),
-                      Text(
-                        'Hi, Abhishek Niraj !',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xFFD3D1D8),
-                          fontSize: 18,
-                          fontFamily: 'Plus Jakarta Sans',
-                          fontWeight: FontWeight.w700,
+                      Positioned(
+                        left: 25,
+                        top: 15,
+                        child: Container(
+                          width: 6,
+                          height: 6,
+                          decoration: const ShapeDecoration(
+                            color: Color(0xFFDF1C41),
+                            shape: OvalBorder(),
+                          ),
                         ),
-                      ),
+                      )
                     ],
                   ),
-                  Container(
-                    width: 48,
-                    height: 48,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Color(0xFFDFE1E7)),
-                        borderRadius: BorderRadius.circular(48),
-                      ),
-                    ),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          top: 0,
-                          bottom: 0,
-                          child: Icon(
-                            Icons.notifications_none_outlined,
-                            size: 27,
-                            color: Color(0xFFF5F5F5),
-                          ),
-                        ),
-                        Positioned(
-                          left: 25,
-                          top: 15,
-                          child: Container(
-                            width: 6,
-                            height: 6,
-                            decoration: ShapeDecoration(
-                              color: Color(0xFFDF1C41),
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 11,
           ),
           Container(
@@ -107,7 +105,7 @@ class _SportsScreenState extends State<SportsScreen> {
           ),
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomLeft,
@@ -124,14 +122,14 @@ class _SportsScreenState extends State<SportsScreen> {
                 ),
 
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 /******************** Top Fitness gym ********************/
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -148,7 +146,7 @@ class _SportsScreenState extends State<SportsScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -168,8 +166,8 @@ class _SportsScreenState extends State<SportsScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -208,7 +206,7 @@ class _SportsScreenState extends State<SportsScreen> {
 
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Column(
@@ -230,8 +228,8 @@ class _SportsScreenState extends State<SportsScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -276,7 +274,7 @@ class _SportsScreenState extends State<SportsScreen> {
 
                 Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomLeft,
@@ -291,11 +289,11 @@ class _SportsScreenState extends State<SportsScreen> {
                     padding: const EdgeInsets.only(bottom: 50),
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -310,7 +308,7 @@ class _SportsScreenState extends State<SportsScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Padding(
@@ -325,7 +323,7 @@ class _SportsScreenState extends State<SportsScreen> {
                                 mainAxisCellCount: 2,
                                 child: Container(
                                   decoration: ShapeDecoration(
-                                    image: DecorationImage(
+                                    image: const DecorationImage(
                                       image: AssetImage(
                                           "assets/images/group_4.png"),
                                       fit: BoxFit.fill,
@@ -335,7 +333,7 @@ class _SportsScreenState extends State<SportsScreen> {
                                       BorderRadius.circular(3),
                                     ),
                                   ),
-                                  child:  Stack(
+                                  child:  const Stack(
                                     children: [
                                       Positioned(
                                           bottom: 45,
@@ -395,7 +393,7 @@ class _SportsScreenState extends State<SportsScreen> {
                                 mainAxisCellCount: 2,
                                 child: Container(
                                   decoration: ShapeDecoration(
-                                    image: DecorationImage(
+                                    image: const DecorationImage(
                                       image: AssetImage(
                                           "assets/images/group_4.png"),
                                       fit: BoxFit.fill,
@@ -405,7 +403,7 @@ class _SportsScreenState extends State<SportsScreen> {
                                       BorderRadius.circular(3),
                                     ),
                                   ),
-                                  child:  Stack(
+                                  child:  const Stack(
                                     children: [
                                       Positioned(
                                           bottom: 45,
@@ -464,15 +462,15 @@ class _SportsScreenState extends State<SportsScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 57,
                         ),
-                        CommonTextWidget(text: "Reviews",
+                        const CommonTextWidget(text: "Reviews",
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: CommonTextWidget(text: "This gym feels like home! The staff and members are"
                               " incredibly welcoming, creating a motivating "
                               "and supportive community.",

@@ -1,6 +1,4 @@
-import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -19,7 +17,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 44,
           ),
           Container(
@@ -62,13 +60,13 @@ class _FitnessScreenState extends State<FitnessScreen> {
                     clipBehavior: Clip.antiAlias,
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Color(0xFFDFE1E7)),
+                        side: const BorderSide(width: 1, color: Color(0xFFDFE1E7)),
                         borderRadius: BorderRadius.circular(48),
                       ),
                     ),
                     child: Stack(
                       children: [
-                        Positioned(
+                        const Positioned(
                           left: 0,
                           right: 0,
                           top: 0,
@@ -85,7 +83,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
                           child: Container(
                             width: 6,
                             height: 6,
-                            decoration: ShapeDecoration(
+                            decoration: const ShapeDecoration(
                               color: Color(0xFFDF1C41),
                               shape: OvalBorder(),
                             ),
@@ -98,7 +96,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 11,
           ),
           Container(
@@ -110,7 +108,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
           ),
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomLeft,
@@ -127,14 +125,14 @@ class _FitnessScreenState extends State<FitnessScreen> {
                 ),
 
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 /******************** Top Fitness gym ********************/
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -151,7 +149,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -171,8 +169,8 @@ class _FitnessScreenState extends State<FitnessScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -211,7 +209,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
 
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Column(
@@ -233,8 +231,8 @@ class _FitnessScreenState extends State<FitnessScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -279,7 +277,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
 
                 Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomLeft,
@@ -294,11 +292,11 @@ class _FitnessScreenState extends State<FitnessScreen> {
                     padding: const EdgeInsets.only(bottom: 50),
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -313,7 +311,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Padding(
@@ -328,7 +326,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
                                 mainAxisCellCount: 2,
                                 child: Container(
                                   decoration: ShapeDecoration(
-                                    image: DecorationImage(
+                                    image: const DecorationImage(
                                       image: AssetImage(
                                           "assets/images/group_4.png"),
                                       fit: BoxFit.fill,
@@ -338,7 +336,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
                                       BorderRadius.circular(3),
                                     ),
                                   ),
-                                  child:  Stack(
+                                  child:  const Stack(
                                     children: [
                                       Positioned(
                                           bottom: 45,
@@ -398,7 +396,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
                                 mainAxisCellCount: 2,
                                 child: Container(
                                   decoration: ShapeDecoration(
-                                    image: DecorationImage(
+                                    image: const DecorationImage(
                                       image: AssetImage(
                                           "assets/images/group_4.png"),
                                       fit: BoxFit.fill,
@@ -408,7 +406,7 @@ class _FitnessScreenState extends State<FitnessScreen> {
                                       BorderRadius.circular(3),
                                     ),
                                   ),
-                                  child:  Stack(
+                                  child:  const Stack(
                                     children: [
                                       Positioned(
                                           bottom: 45,
@@ -467,15 +465,15 @@ class _FitnessScreenState extends State<FitnessScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 57,
                         ),
-                        CommonTextWidget(text: "Reviews",
+                        const CommonTextWidget(text: "Reviews",
                         fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: CommonTextWidget(text: "This gym feels like home! The staff and members are"
                               " incredibly welcoming, creating a motivating "
                               "and supportive community.",

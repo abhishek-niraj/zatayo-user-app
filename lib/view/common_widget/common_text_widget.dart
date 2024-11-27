@@ -8,6 +8,7 @@ class CommonTextWidget extends StatelessWidget {
   final FontWeight fontWeight;
   final double letterSpacing;
   final TextAlign textAlign; // Add TextAlign parameter
+  final TextOverflow overflow; // Add overflow parameter
 
   const CommonTextWidget({
     super.key,
@@ -17,7 +18,7 @@ class CommonTextWidget extends StatelessWidget {
     this.fontWeight = FontWeight.w400,
     this.letterSpacing = -0.3,
     this.textAlign = TextAlign.start, // Default alignment is TextAlign.start
-
+    this.overflow = TextOverflow.clip, // Default overflow is TextOverflow.clip
   });
 
   @override
@@ -25,6 +26,7 @@ class CommonTextWidget extends StatelessWidget {
     return Text(
       text,
       textAlign: textAlign,
+      overflow: overflow, // Add overflow property here
       style: GoogleFonts.workSans(
         textStyle: TextStyle(
           color: color,

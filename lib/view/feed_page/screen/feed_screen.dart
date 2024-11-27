@@ -5,6 +5,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:zatayo/constant/app_color.dart';
+import 'package:zatayo/view/Profile/screen/profile_screen.dart';
 
 import '../../common_widget/common_text_widget.dart';
 import '../../fitness/screen/fitness_screen.dart';
@@ -83,12 +84,12 @@ class _HomeV2State extends State<HomeV2> {
             _selectedPageIndex = index;
           });
         },
-        children: [
+        children: const [
           HomePage(),
           FitnessScreen(),
           Center(child: Text('Scan Page')),
           SportsScreen(),
-          Center(child: Text('Profile Page')),
+          ProfileScreen()
         ],
       ),
     );
@@ -97,13 +98,15 @@ class _HomeV2State extends State<HomeV2> {
 
 // Example Pages
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 44,
           ),
           Container(
@@ -146,13 +149,13 @@ class HomePage extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Color(0xFFDFE1E7)),
+                        side: const BorderSide(width: 1, color: Color(0xFFDFE1E7)),
                         borderRadius: BorderRadius.circular(48),
                       ),
                     ),
                     child: Stack(
                       children: [
-                        Positioned(
+                        const Positioned(
                           left: 0,
                           right: 0,
                           top: 0,
@@ -169,7 +172,7 @@ class HomePage extends StatelessWidget {
                           child: Container(
                             width: 6,
                             height: 6,
-                            decoration: ShapeDecoration(
+                            decoration: const ShapeDecoration(
                               color: Color(0xFFDF1C41),
                               shape: OvalBorder(),
                             ),
@@ -182,7 +185,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 11,
           ),
           Container(
@@ -194,7 +197,7 @@ class HomePage extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomLeft,
@@ -210,7 +213,7 @@ class HomePage extends StatelessWidget {
                   height: 20,
                 ),
 
-                Row(
+                const Row(
                   children: [
                     SizedBox(
                       width: 20,
@@ -221,15 +224,15 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
-                    Container(
+                    SizedBox(
                       width: 100,
                       height: 150,
                       child: Column(
@@ -250,7 +253,7 @@ class HomePage extends StatelessWidget {
                                     child: Container(
                                       width: 100,
                                       height: 100,
-                                      decoration: ShapeDecoration(
+                                      decoration: const ShapeDecoration(
                                         shape: OvalBorder(
                                           side: BorderSide(
                                             width: 1.30,
@@ -301,10 +304,10 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          Column(
+                          const Column(
                             children: [
                               Text(
                                 'DIAMOND',
@@ -338,10 +341,10 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
-                    Container(
+                    SizedBox(
                       width: 100,
                       height: 150,
                       child: Column(
@@ -415,10 +418,10 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          Column(
+                          const Column(
                             children: [
                               Text(
                                 'GOLD',
@@ -452,10 +455,10 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
-                    Container(
+                    SizedBox(
                       width: 100,
                       height: 150,
                       child: Column(
@@ -527,10 +530,10 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          Column(
+                          const Column(
                             children: [
                               Text(
                                 'GOLD',
@@ -566,14 +569,14 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
                       child: Row(
                         children: [
                           Text(
@@ -583,7 +586,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -608,13 +611,13 @@ class HomePage extends StatelessWidget {
                                         decoration: ShapeDecoration(
                                           color: Colors.white.withOpacity(0.25),
                                           shape: RoundedRectangleBorder(
-                                            side: BorderSide(
+                                            side: const BorderSide(
                                                 width: 0.10,
                                                 color: Colors.white),
                                             borderRadius:
                                                 BorderRadius.circular(7.80),
                                           ),
-                                          shadows: [
+                                          shadows: const [
                                             BoxShadow(
                                               color: Color(0x1E18274B),
                                               blurRadius: 6.25,
@@ -655,13 +658,13 @@ class HomePage extends StatelessWidget {
                                       top: 300,
                                       child: Column(
                                         children: [
-                                          Center(
+                                          const Center(
                                             child: CommonTextWidget(
                                               text: "SMIMMING",
                                               fontSize: 30,
                                             ),
                                           ),
-                                          CommonTextWidget(
+                                          const CommonTextWidget(
                                             text: "Playing",
                                             fontSize: 20,
                                           ),
@@ -705,14 +708,14 @@ class HomePage extends StatelessWidget {
                 ),
                 //*************************************/
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 /******************** Top Fitness gym ********************/
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -729,7 +732,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -749,8 +752,8 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -789,7 +792,7 @@ class HomePage extends StatelessWidget {
 
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Column(
@@ -811,8 +814,8 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -853,7 +856,7 @@ class HomePage extends StatelessWidget {
                 ),
                 /******************** Top Fitness gym ********************/
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -862,10 +865,10 @@ class HomePage extends StatelessWidget {
                   decoration: ShapeDecoration(
                     color: Colors.white.withOpacity(0.25),
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 0.10, color: Colors.white),
+                      side: const BorderSide(width: 0.10, color: Colors.white),
                       borderRadius: BorderRadius.circular(7.80),
                     ),
-                    shadows: [
+                    shadows: const [
                       BoxShadow(
                         color: Color(0x1E18274B),
                         blurRadius: 6.25,
@@ -882,15 +885,15 @@ class HomePage extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
-                      CommonTextWidget(text: "Transform"),
+                      const CommonTextWidget(text: "Transform"),
                       Image.asset('assets/images/loss_weight.png'),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CommonTextWidget(text: 'Before '),
@@ -898,16 +901,16 @@ class HomePage extends StatelessWidget {
                           CommonTextWidget(text: 'After ')
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 7,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              padding: EdgeInsets.symmetric(horizontal: 20),
                               child: CommonTextWidget(text: 'Transform yourself today for'
                                   ' just ₹ 699 – see the difference tomorrow!',
                                   textAlign: TextAlign.center
@@ -923,7 +926,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20),
@@ -957,7 +960,7 @@ class HomePage extends StatelessWidget {
                                         width: 0.10, color: Colors.white),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  shadows: [
+                                  shadows: const [
                                     BoxShadow(
                                       color: Color(0x1E18274B),
                                       blurRadius: 6.41,
@@ -974,7 +977,7 @@ class HomePage extends StatelessWidget {
                                 ),
                                 child: Column(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 13,
                                     ),
                                     Padding(
@@ -984,7 +987,7 @@ class HomePage extends StatelessWidget {
                                         width: 200,
                                         height: 158,
                                         decoration: ShapeDecoration(
-                                          image: DecorationImage(
+                                          image: const DecorationImage(
                                             image: AssetImage(
                                                 "assets/images/plan.png"),
                                             fit: BoxFit.fill,
@@ -996,7 +999,7 @@ class HomePage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     Padding(
@@ -1004,28 +1007,28 @@ class HomePage extends StatelessWidget {
                                           horizontal: 15),
                                       child: Column(
                                         children: [
-                                          CommonTextWidget(
+                                          const CommonTextWidget(
                                             text: "Jatayu Home",
                                             fontWeight: FontWeight.w600,
                                             fontSize: 20,
                                             letterSpacing: -0.3,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
-                                          CommonTextWidget(
+                                          const CommonTextWidget(
                                             text:
                                                 "Unlimited access to group classes, all gyms"
                                                 " and at-home workouts",
                                             fontSize: 13,
                                             fontWeight: FontWeight.w400,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 8,
                                           ),
                                           Container(
                                             width: 200,
-                                            decoration: ShapeDecoration(
+                                            decoration: const ShapeDecoration(
                                               shape: RoundedRectangleBorder(
                                                 side: BorderSide(
                                                   width: 0.70,
@@ -1036,10 +1039,10 @@ class HomePage extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 8,
                                           ),
-                                          Row(
+                                          const Row(
                                             children: [
                                               CommonTextWidget(
                                                 text: "₹ 1450/month ",
@@ -1083,7 +1086,7 @@ class HomePage extends StatelessWidget {
 
                 Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomLeft,
@@ -1098,20 +1101,20 @@ class HomePage extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 50),
                     child: Column(
                       children: [
-                        CommonTextWidget(text: "Unleash",
+                        const CommonTextWidget(text: "Unleash",
                         fontSize: 24,
                           fontWeight: FontWeight.w500,
                         ),
-                        CommonTextWidget(text: "Your fitness",
+                        const CommonTextWidget(text: "Your fitness",
                         fontSize: 24,
                           fontWeight: FontWeight.w700,
                         ),
-                        CommonTextWidget(text: "Journey today",
+                        const CommonTextWidget(text: "Journey today",
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
                         ),
 
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
@@ -1126,7 +1129,7 @@ class HomePage extends StatelessWidget {
                             mainAxisCellCount: 2,
                             child: Container(
                               decoration: ShapeDecoration(
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                   image: AssetImage(
                                       "assets/images/group_4.png"),
                                   fit: BoxFit.fill,
@@ -1144,7 +1147,7 @@ class HomePage extends StatelessWidget {
                             mainAxisCellCount: 3,
                             child: Container(
                               decoration: ShapeDecoration(
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                   image: AssetImage(
                                       "assets/images/group_3.png"),
                                   fit: BoxFit.fill,
@@ -1162,7 +1165,7 @@ class HomePage extends StatelessWidget {
                             mainAxisCellCount: 2,
                             child: Container(
                               decoration: ShapeDecoration(
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                   image: AssetImage(
                                       "assets/images/plan.png"),
                                   fit: BoxFit.fill,
@@ -1180,7 +1183,7 @@ class HomePage extends StatelessWidget {
                             mainAxisCellCount: 2,
                             child: Container(
                               decoration: ShapeDecoration(
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                   image: AssetImage(
                                       "assets/images/group.png"),
                                   fit: BoxFit.fill,

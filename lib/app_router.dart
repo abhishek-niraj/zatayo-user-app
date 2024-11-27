@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:zatayo/view/Profile/screen/edit_profile_screen.dart';
+import 'package:zatayo/view/Profile/screen/my_friend_screen.dart';
+import 'package:zatayo/view/Profile/screen/profile_screen.dart';
 import 'package:zatayo/view/feed_page/screen/feed_screen.dart';
 import 'package:zatayo/view/login/screen/enter_phone_number_screen.dart';
 import 'package:zatayo/view/login/screen/user_name_screen.dart';
@@ -25,8 +27,20 @@ class AppRouter {
       ),
       GoRoute(path: '/feed-page',
           name: 'feed-page',
-          builder: (context,state) =>  HomeV2()
+          builder: (context,state) =>  const HomeV2()
       ),
+      GoRoute(path: '/profile-screen',
+        name:"profileScreen",
+        builder: (context,state) => const ProfileScreen()
+      ),
+      GoRoute(path: "/edit-profile",
+      name: "editProfile",
+        builder: (context,state) => const EditProfileScreen()
+      ),
+      GoRoute(path: "/my-friends-screen",
+      name: "myFriends",
+        builder: (context,state) => const MyFriendScreen()
+      )
     ],
   );
 }

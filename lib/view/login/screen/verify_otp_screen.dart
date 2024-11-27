@@ -250,7 +250,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                               SizedBox(
                                 width: media.width,
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  padding: const EdgeInsets.symmetric(horizontal: 15),
                                   child: Column(
                                     children: [
                                       BlocConsumer<OtpBloc, OtpState>(
