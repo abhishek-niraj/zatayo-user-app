@@ -27,7 +27,7 @@ class CommonTextWidget extends StatelessWidget {
       text,
       textAlign: textAlign,
       overflow: overflow, // Add overflow property here
-      style: GoogleFonts.workSans(
+      style: GoogleFonts.lato(
         textStyle: TextStyle(
           color: color,
           fontWeight: fontWeight,
