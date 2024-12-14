@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../constant/app_color.dart';
 import '../../common_widget/common_text_widget.dart';
+import '../../individual_sports_gym/screen/individual_gym.dart';
 class FitnessScreen extends StatefulWidget {
   const FitnessScreen({super.key});
 
@@ -129,147 +131,158 @@ class _FitnessScreenState extends State<FitnessScreen> {
                   height: 20,
                 ),
                 /******************** Top Fitness gym ********************/
-                Column(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CommonTextWidget(
-                              text: "Top Fitness Center in your Area",
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                          CommonTextWidget(
-                            text: "See All",
-                            color: AppColor.kSecondaryButtonColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          )
-                        ],
+                InkWell(
+                  onTap: (){
+                    context.push(IndividualGym.routeName);
+                  },
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CommonTextWidget(
+                                text: "Top Fitness Center in your Area",
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600),
+                            CommonTextWidget(
+                              text: "See All",
+                              color: AppColor.kSecondaryButtonColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        width: double.infinity,
-                        height: 180,
-                        decoration: ShapeDecoration(
-                          image: const DecorationImage(
-                            image: AssetImage(
-                                "assets/images/top_fitness_1.png"),
-                            fit: BoxFit.fill,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
+                          width: double.infinity,
+                          height: 180,
+                          decoration: ShapeDecoration(
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                  "assets/images/top_fitness_1.png"),
+                              fit: BoxFit.fill,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CommonTextWidget(text: "Planet Fitness and Gym",
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.star,
-                                color: Colors.orange,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              CommonTextWidget(text: '4.5')
-                            ],
-                          ),
-                        ],
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CommonTextWidget(text: "Planet Fitness and Gym",
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.star,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CommonTextWidget(text: '4.5')
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.location_on_outlined,
-                            size: 30,),
-                          CommonTextWidget(text: "California, New York",
-                            fontWeight: FontWeight.w400,
-                          )
-                        ],
-                      ),
-                    )
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.location_on_outlined,
+                              size: 30,),
+                            CommonTextWidget(text: "California, New York",
+                              fontWeight: FontWeight.w400,
+                            )
+                          ],
+                        ),
+                      )
 
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        width: double.infinity,
-                        height: 180,
-                        decoration: ShapeDecoration(
-                          image: const DecorationImage(
-                            image: AssetImage(
-                                "assets/images/top_fitness_2.png"),
-                            fit: BoxFit.fill,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                InkWell(
+                  onTap: (){
+                    context.push(IndividualGym.routeName);
+
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
+                          width: double.infinity,
+                          height: 180,
+                          decoration: ShapeDecoration(
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                  "assets/images/top_fitness_2.png"),
+                              fit: BoxFit.fill,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CommonTextWidget(text: "Planet Fitness and Gym",
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.star,
-                                color: Colors.orange,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              CommonTextWidget(text: '4.5')
-                            ],
-                          ),
-                        ],
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CommonTextWidget(text: "Planet Fitness and Gym",
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.star,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CommonTextWidget(text: '4.5')
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.location_on_outlined,
-                            size: 30,),
-                          CommonTextWidget(text: "California, New York",
-                            fontWeight: FontWeight.w400,
-                          )
-                        ],
-                      ),
-                    )
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(Icons.location_on_outlined,
+                              size: 30,),
+                            CommonTextWidget(text: "California, New York",
+                              fontWeight: FontWeight.w400,
+                            )
+                          ],
+                        ),
+                      )
 
-                  ],
+                    ],
+                  ),
                 ),
                 /******************** Top Fitness gym ********************/
 

@@ -3,18 +3,23 @@ import 'package:zatayo/view/Profile/screen/edit_profile_screen.dart';
 import 'package:zatayo/view/Profile/screen/my_friend_screen.dart';
 import 'package:zatayo/view/Profile/screen/profile_screen.dart';
 import 'package:zatayo/view/feed_page/screen/feed_screen.dart';
+import 'package:zatayo/view/home_work_out/screen/home_work_out.dart';
+import 'package:zatayo/view/home_work_out/screen/home_work_out_session.dart';
+import 'package:zatayo/view/home_work_out/screen/watch_home_work_out.dart';
 import 'package:zatayo/view/individual_sports_gym/screen/individual_gym.dart';
 import 'package:zatayo/view/individual_sports_gym/screen/individual_sports.dart';
 import 'package:zatayo/view/login/screen/enter_phone_number_screen.dart';
 import 'package:zatayo/view/login/screen/user_name_screen.dart';
 import 'package:zatayo/view/login/screen/verify_otp_screen.dart';
 import 'package:zatayo/view/near_by_gym/screen/near_by_gyms.dart';
+import 'package:zatayo/view/notification/screen/notification_screen.dart';
 import 'package:zatayo/view/sports_places/screen/sports_places.dart';
 import 'package:zatayo/view/subscriptionplan/screen/buy_subscription_plan.dart';
 import 'package:zatayo/view/subscriptionplan/screen/subscription_plan_details.dart';
 import 'package:zatayo/view/subscriptionplan/screen_argumnet/buy_subscription_plan_screen_argument.dart';
 import 'package:zatayo/view/subscriptionplan/subscription_plan.dart';
 import 'package:zatayo/view/subscriptionplan/widget/subscription_plan_details_screen_argument.dart';
+import 'package:zatayo/view/success_paymnet/screen/success_payment.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -92,6 +97,41 @@ class AppRouter {
               planDetails: args,
             );
           }),
+      GoRoute(
+        name: "paymentScreen",
+        path: "/payment-success",
+        builder: (context, state) {
+          return const SuccessPayment();
+        },
+      ),
+      GoRoute(
+        name: "notificationScreen",
+        path: "/notification-screen",
+        builder: (context, state) {
+          return const NotificationScreen();
+        },
+      ),
+      GoRoute(
+        name: "homeWorkOut",
+        path: "/home-work-out",
+        builder: (context, state) {
+          return const HomeWorkOut();
+        },
+      ),
+      GoRoute(
+        name: "homeWorkOutSession",
+        path: "/home-work-out-session",
+        builder: (context, state) {
+          return const HomeWorkOutSession();
+        },
+      ),
+      GoRoute(
+        name: "watchHomeWorkOut",
+        path: "/watch-home-work-out",
+        builder: (context, state) {
+          return const WatchHomeWorkOut();
+        },
+      ),
     ],
   );
 }

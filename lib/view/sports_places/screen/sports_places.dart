@@ -5,6 +5,7 @@ import '../../common_widget/common_app_bar_widget.dart';
 import '../../common_widget/common_item.dart';
 import '../../common_widget/common_text_widget.dart';
 class SportsPlaces extends StatefulWidget {
+  static const String routeName = "/sport-places";
   const SportsPlaces({super.key});
 
   @override

@@ -33,14 +33,14 @@ class CommonButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width, // Use the width provided or wrap content
-      height: height, // Use the height provided or wrap content
+      height: height ?? 55, // Use the height provided or wrap content
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor, // Button background color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius), // Button border radius
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16), // Button padding
+          // padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16), // Button padding
         ),
         onPressed: onPressed,
         child: Row(

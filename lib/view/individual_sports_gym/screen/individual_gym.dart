@@ -5,6 +5,7 @@ import '../../common_widget/common_equipment.dart';
 import '../../common_widget/common_item.dart';
 import '../../common_widget/common_text_widget.dart';
 class IndividualGym extends StatefulWidget {
+  static const String routeName = "/individual-gym";
   const IndividualGym({super.key});
 
   @override

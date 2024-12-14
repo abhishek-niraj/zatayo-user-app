@@ -5,9 +5,13 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
-import 'package:zatayo/app_router.dart';
 import 'package:zatayo/constant/app_color.dart';
 import 'package:zatayo/view/Profile/screen/profile_screen.dart';
+import 'package:zatayo/view/home_work_out/screen/home_work_out.dart';
+import 'package:zatayo/view/individual_sports_gym/screen/individual_gym.dart';
+import 'package:zatayo/view/individual_sports_gym/screen/individual_sports.dart';
+import 'package:zatayo/view/notification/screen/notification_screen.dart';
+import 'package:zatayo/view/sports_places/screen/sports_places.dart';
 import 'package:zatayo/view/subscriptionplan/subscription_plan.dart';
 
 import '../../common_widget/common_text_widget.dart';
@@ -145,43 +149,48 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  width: 48,
-                  height: 48,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side:
-                          const BorderSide(width: 1, color: Color(0xFFDFE1E7)),
-                      borderRadius: BorderRadius.circular(48),
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      const Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: Icon(
-                          Icons.notifications_none_outlined,
-                          size: 27,
-                          color: Color(0xFFF5F5F5),
-                        ),
+                InkWell(
+                  onTap: () {
+                    context.push(NotificationScreen.routeName);
+                  },
+                  child: Container(
+                    width: 48,
+                    height: 48,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                            width: 1, color: Color(0xFFDFE1E7)),
+                        borderRadius: BorderRadius.circular(48),
                       ),
-                      Positioned(
-                        left: 25,
-                        top: 15,
-                        child: Container(
-                          width: 6,
-                          height: 6,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFFDF1C41),
-                            shape: OvalBorder(),
+                    ),
+                    child: Stack(
+                      children: [
+                        const Positioned(
+                          left: 0,
+                          right: 0,
+                          top: 0,
+                          bottom: 0,
+                          child: Icon(
+                            Icons.notifications_none_outlined,
+                            size: 27,
+                            color: Color(0xFFF5F5F5),
                           ),
                         ),
-                      )
-                    ],
+                        Positioned(
+                          left: 25,
+                          top: 15,
+                          child: Container(
+                            width: 6,
+                            height: 6,
+                            decoration: const ShapeDecoration(
+                              color: Color(0xFFDF1C41),
+                              shape: OvalBorder(),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -215,32 +224,68 @@ class HomePage extends StatelessWidget {
                   height: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Container(
-                    height: 30,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        const CommonTextWidget(text: "Join Live Class"),
-                        SizedBox(
-                          width: 10,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    spacing: 20, // Horizontal space between items
+                    runSpacing: 20, // Vertical space between rows
+                    children: [
+                      // Near by gyms
+                      InkWell(
+                        onTap: () {
+                          context.push("/near-by-gyms");
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              "assets/images/near_by_gym.png",
+                              width: 60, // Adjust size as needed
+                              height: 60,
+                            ),
+                            const SizedBox(height: 8),
+                            const CommonTextWidget(text: "Near by gyms"),
+                          ],
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              context.push("/near-by-gyms");
-                            },
-                            child: const CommonTextWidget(text: "View near by gyms")),
-                        const SizedBox(
-                          width: 10,
+                      ),
+                      // Play Sports
+                      InkWell(
+                        onTap: () {
+                          context.push("/sport-places");
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              "assets/images/play_sports.png",
+                              width: 60,
+                              height: 60,
+                            ),
+                            const SizedBox(height: 8),
+                            const CommonTextWidget(text: "Play Sports"),
+                          ],
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              context.push("/sport-places");
-                            },
-                            child: const CommonTextWidget(text: "Play Sports")),
-                      ],
-                    ),
+                      ),
+                      // Home workout
+                      InkWell(
+                        onTap: () {
+                          context.push(HomeWorkOut.routeName);
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              "assets/images/home_wor_out.png",
+                              width: 60,
+                              height: 60,
+                            ),
+                            const SizedBox(height: 8),
+                            const CommonTextWidget(text: "Home workout"),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                ),
+                const SizedBox(
+                  height: 30,
                 ),
                 const Row(
                   children: [
@@ -262,7 +307,7 @@ class HomePage extends StatelessWidget {
                       width: 20,
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         context.push(SubscriptionPlan.routeName);
                       },
                       child: SizedBox(
@@ -379,7 +424,7 @@ class HomePage extends StatelessWidget {
                       width: 20,
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         context.push(SubscriptionPlan.routeName);
                       },
                       child: SizedBox(
@@ -498,7 +543,7 @@ class HomePage extends StatelessWidget {
                       width: 20,
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         context.push(SubscriptionPlan.routeName);
                       },
                       child: SizedBox(
@@ -643,106 +688,114 @@ class HomePage extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           itemCount: 5,
                           itemBuilder: ((context, index) {
-                            return Column(
-                              children: [
-                                Stack(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Container(
-                                        width: 334.48,
-                                        height: 450,
-                                        decoration: ShapeDecoration(
-                                          color: Colors.white.withOpacity(0.25),
-                                          shape: RoundedRectangleBorder(
-                                            side: const BorderSide(
-                                                width: 0.10,
-                                                color: Colors.white),
+                            return InkWell(
+                              onTap: () {
+                                context.push(SportsPlaces.routeName);
+                              },
+                              child: Column(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Container(
+                                          width: 334.48,
+                                          height: 450,
+                                          decoration: ShapeDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.25),
+                                            shape: RoundedRectangleBorder(
+                                              side: const BorderSide(
+                                                  width: 0.10,
+                                                  color: Colors.white),
+                                              borderRadius:
+                                                  BorderRadius.circular(7.80),
+                                            ),
+                                            shadows: const [
+                                              BoxShadow(
+                                                color: Color(0x1E18274B),
+                                                blurRadius: 6.25,
+                                                offset: Offset(0, 2.78),
+                                                spreadRadius: -2.08,
+                                              ),
+                                              BoxShadow(
+                                                color: Color(0x3F000000),
+                                                blurRadius: 1.39,
+                                                offset: Offset(0, 1.39),
+                                                spreadRadius: 0,
+                                              ),
+                                            ],
+                                          ),
+                                          child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(7.80),
-                                          ),
-                                          shadows: const [
-                                            BoxShadow(
-                                              color: Color(0x1E18274B),
-                                              blurRadius: 6.25,
-                                              offset: Offset(0, 2.78),
-                                              spreadRadius: -2.08,
+                                            child: CachedNetworkImage(
+                                              filterQuality: FilterQuality.low,
+                                              fit: BoxFit.cover,
+                                              imageUrl:
+                                                  "https://srv430249.hstgr.cloud/backend/uploads/1703900337374-badminton-concept-with-shuttlecock-racket (2).jpg",
+                                              placeholder: (context, url) =>
+                                                  const Center(
+                                                      child:
+                                                          CircularProgressIndicator()),
+                                              errorWidget: (context, url,
+                                                      error) =>
+                                                  const Center(
+                                                      child: Icon(Icons.error)),
                                             ),
-                                            BoxShadow(
-                                              color: Color(0x3F000000),
-                                              blurRadius: 1.39,
-                                              offset: Offset(0, 1.39),
-                                              spreadRadius: 0,
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        left: 0,
+                                        right: 0,
+                                        top: 300,
+                                        child: Column(
+                                          children: [
+                                            const Center(
+                                              child: CommonTextWidget(
+                                                text: "SMIMMING",
+                                                fontSize: 30,
+                                              ),
+                                            ),
+                                            const CommonTextWidget(
+                                              text: "Playing",
+                                              fontSize: 20,
+                                            ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10)),
+                                              child: BackdropFilter(
+                                                filter: ImageFilter.blur(
+                                                    sigmaX: 15, sigmaY: 15),
+                                                child: Container(
+                                                  width: 100,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.grey
+                                                          .withOpacity(0),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .all(
+                                                              Radius.circular(
+                                                                  10))),
+                                                  child: const Center(
+                                                      child: CommonTextWidget(
+                                                    text: "Explore",
+                                                    fontSize: 20,
+                                                  )),
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(7.80),
-                                          child: CachedNetworkImage(
-                                            filterQuality: FilterQuality.low,
-                                            fit: BoxFit.cover,
-                                            imageUrl:
-                                                "https://srv430249.hstgr.cloud/backend/uploads/1703900337374-badminton-concept-with-shuttlecock-racket (2).jpg",
-                                            placeholder: (context, url) =>
-                                                const Center(
-                                                    child:
-                                                        CircularProgressIndicator()),
-                                            errorWidget: (context, url,
-                                                    error) =>
-                                                const Center(
-                                                    child: Icon(Icons.error)),
-                                          ),
-                                        ),
                                       ),
-                                    ),
-                                    Positioned(
-                                      left: 0,
-                                      right: 0,
-                                      top: 300,
-                                      child: Column(
-                                        children: [
-                                          const Center(
-                                            child: CommonTextWidget(
-                                              text: "SMIMMING",
-                                              fontSize: 30,
-                                            ),
-                                          ),
-                                          const CommonTextWidget(
-                                            text: "Playing",
-                                            fontSize: 20,
-                                          ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(10)),
-                                            child: BackdropFilter(
-                                              filter: ImageFilter.blur(
-                                                  sigmaX: 15, sigmaY: 15),
-                                              child: Container(
-                                                width: 100,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey
-                                                        .withOpacity(0),
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                10))),
-                                                child: const Center(
-                                                    child: CommonTextWidget(
-                                                  text: "Explore",
-                                                  fontSize: 20,
-                                                )),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             );
                           }),
                         ),
@@ -779,62 +832,71 @@ class HomePage extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        width: double.infinity,
-                        height: 180,
-                        decoration: ShapeDecoration(
-                          image: const DecorationImage(
-                            image:
-                                AssetImage("assets/images/top_fitness_1.png"),
-                            fit: BoxFit.fill,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    InkWell(
+                      onTap: () {
+                        context.push(IndividualSports.routeName);
+                      },
+                      child: Column(
                         children: [
-                          CommonTextWidget(
-                            text: "Planet Fitness and Gym",
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.orange,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Container(
+                              width: double.infinity,
+                              height: 180,
+                              decoration: ShapeDecoration(
+                                image: const DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/top_fitness_1.png"),
+                                  fit: BoxFit.fill,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                               ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              CommonTextWidget(text: '4.5')
-                            ],
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.location_on_outlined,
-                            size: 30,
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CommonTextWidget(
+                                  text: "Planet Fitness and Gym",
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 18,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.orange,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    CommonTextWidget(text: '4.5')
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                          CommonTextWidget(
-                            text: "California, New York",
-                            fontWeight: FontWeight.w400,
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.location_on_outlined,
+                                  size: 30,
+                                ),
+                                CommonTextWidget(
+                                  text: "California, New York",
+                                  fontWeight: FontWeight.w400,
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -844,71 +906,77 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        width: double.infinity,
-                        height: 180,
-                        decoration: ShapeDecoration(
-                          image: const DecorationImage(
-                            image:
-                                AssetImage("assets/images/top_fitness_2.png"),
-                            fit: BoxFit.fill,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                /******************** Top Fitness gym ********************/
+
+                InkWell(
+                  onTap: () {
+                    context.push(IndividualGym.routeName);
+                  },
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
+                          width: double.infinity,
+                          height: 180,
+                          decoration: ShapeDecoration(
+                            image: const DecorationImage(
+                              image:
+                                  AssetImage("assets/images/top_fitness_2.png"),
+                              fit: BoxFit.fill,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CommonTextWidget(
-                            text: "Planet Fitness and Gym",
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.orange,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              CommonTextWidget(text: '4.5')
-                            ],
-                          ),
-                        ],
+                      const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CommonTextWidget(
+                              text: "Planet Fitness and Gym",
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.orange,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CommonTextWidget(text: '4.5')
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.location_on_outlined,
-                            size: 30,
-                          ),
-                          CommonTextWidget(
-                            text: "California, New York",
-                            fontWeight: FontWeight.w400,
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.location_on_outlined,
+                              size: 30,
+                            ),
+                            CommonTextWidget(
+                              text: "California, New York",
+                              fontWeight: FontWeight.w400,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                /******************** Top Fitness gym ********************/
 
                 const SizedBox(
                   height: 20,
@@ -1006,9 +1074,8 @@ class HomePage extends StatelessWidget {
                             itemCount: 7,
                             itemBuilder: (BuildContext context, int index) {
                               return InkWell(
-                                onTap: (){
+                                onTap: () {
                                   context.push(SubscriptionPlan.routeName);
-
                                 },
                                 child: Container(
                                   width: 200,

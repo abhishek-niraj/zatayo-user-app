@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:zatayo/app_router.dart';
 import 'package:zatayo/view/common_widget/common_app_bar_widget.dart';
 import 'package:zatayo/view/common_widget/common_button_widget.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
@@ -6,6 +8,7 @@ import 'package:zatayo/view/subscriptionplan/screen_argumnet/buy_subscription_pl
 import 'package:zatayo/view/subscriptionplan/widget/diamond_plan.dart';
 import 'package:zatayo/view/subscriptionplan/widget/gold_plan.dart';
 import 'package:zatayo/view/subscriptionplan/widget/sliver_plan.dart';
+import 'package:zatayo/view/success_paymnet/screen/success_payment.dart';
 
 import '../../common_widget/common_container_widget.dart';
 
@@ -25,10 +28,10 @@ class _BuySubscriptionPlanState extends State<BuySubscriptionPlan> {
     print(widget.planDetails!.moneyColor);
     return Scaffold(
       appBar: AppBar(
-        title: CommonAppBarWidget(title: "Subscription"),
+        title: const CommonAppBarWidget(title: "Subscription"),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomLeft,
@@ -84,13 +87,13 @@ class _BuySubscriptionPlanState extends State<BuySubscriptionPlan> {
                               padding: const EdgeInsets.symmetric(horizontal: 20),
                               child: Row(
                                 children: [
-                                  Expanded(
+                                  const Expanded(
                                     child: ContainerWidget(
                                       height: 102,
                                       borderRadius: 3,
                                       child: Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 20, top: 22),
+                                            EdgeInsets.only(left: 20, top: 22),
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
@@ -219,7 +222,9 @@ class _BuySubscriptionPlanState extends State<BuySubscriptionPlan> {
                           Expanded(
                             child: CommonButtonWidget(
                                 text: "TRY 7 DAYS AND SUBSCRIBE",
-                                onPressed: () {}),
+                                onPressed: () {
+                                  context.push(SuccessPayment.routeName);
+                                }),
                           ),
                         ],
                       ),

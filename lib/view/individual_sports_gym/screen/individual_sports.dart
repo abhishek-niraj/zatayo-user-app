@@ -6,6 +6,7 @@ import 'package:zatayo/view/common_widget/common_text_widget.dart';
 import '../../common_widget/common_equipment.dart';
 
 class IndividualSports extends StatefulWidget {
+  static const String routeName = "/individual-sports";
   const IndividualSports({super.key});
 
   @override
