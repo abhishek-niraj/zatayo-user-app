@@ -25,15 +25,15 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: '/',
     routes: [
-      // GoRoute(
-      //   name: 'enter-phone-number',
-      //   path: '/',
-      //   builder: (context, state) =>  EnterPhoneNumberScreen(),
-      // ),
       GoRoute(
-          path: "/",
-          name: "near-by-gyms",
-          builder: (context, state) => const HomeV2()),
+        name: 'enter-phone-number',
+        path: '/',
+        builder: (context, state) =>  EnterPhoneNumberScreen(),
+      ),
+      // GoRoute(
+      //     path: "/",
+      //     name: "near-by-gyms",
+      //     builder: (context, state) => const HomeV2()),
       GoRoute(
         name: 'verifyOtpScreen',
         path: '/verify-otp-screen',

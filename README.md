@@ -8,6 +8,7 @@ This project is a starting point for a Flutter application.
 ## Make Seralization for model
 flutter clean 
 flutter pub run build_runner build --delete-conflicting-outputs
+dart run build_runner build
 
 A few resources to get you started if this is your first Flutter project:
 

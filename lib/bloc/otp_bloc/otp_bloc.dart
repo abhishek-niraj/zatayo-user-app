@@ -26,6 +26,9 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       }
     });
     on<VerifyOtp>((event, emit) async {
+      print("-------------");
+      print(event.bodyRequest);
+      print("-------------------");
       emit(VerifyOtpLoading()); // Emit loading state
       try {
         final responseMap = await apiClient.apiCall(
@@ -48,6 +51,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
           statusCode: 400,
           message: "Something went wrong"
         )));
+
+        rethrow;
       }
     });
   }

@@ -3,13 +3,15 @@ import 'package:flutter/foundation.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:zatayo/utils/app_shared_preference_helper.dart';
 
+ // const baseUrl = 'https://srv430249.hstgr.cloud/backend/api/v1';
+ const baseUrl = 'http://192.168.29.248:3000';
 class ApiClient {
   final Dio _dio;
 
   ApiClient()
       : _dio = Dio(BaseOptions(
-          baseUrl:
-              'https://srv430249.hstgr.cloud/backend/api/v1', // Replace with your base URL
+          baseUrl: '$baseUrl/api/v1',
+              // Replace with your base URL
         ));
 
   Future<String?> loadData() async {
@@ -32,7 +34,7 @@ class ApiClient {
   // New method for making API calls with Bearer token
   Future<Response> apiCall(
       {String? apiEndPoint, Map<String, dynamic>? data}) async {
-    String bearerToken = "";
+    String? bearerToken = await loadData();
     try {
       _dio.options.headers['Authorization'] = 'Bearer $bearerToken';
 
@@ -42,6 +44,11 @@ class ApiClient {
       );
       return response;
     } catch (e) {
+      if(!kReleaseMode){
+        if (kDebugMode) {
+          print(e);
+        }
+      }
       throw Exception('Failed to make API call: $e');
     }
   }
