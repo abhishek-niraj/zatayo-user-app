@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zatayo/constant/app_color.dart';
+import 'package:zatayo/cubit/customer_details/customer_details_cubit.dart';
 import 'package:zatayo/view/Profile/screen/profile_screen.dart';
 
 import '../../Scanner/screen/scanner_screen.dart';
@@ -36,7 +38,13 @@ class _HomeV2State extends State<HomeV2> {
     _pageController.dispose(); // Dispose the controller when not needed
     super.dispose();
   }
+   @override
+  void initState() {
+    // TODO: implement
+     context.read<CustomerDetailsCubit>().fetchCustomerDetails();
 
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

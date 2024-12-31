@@ -123,9 +123,7 @@ class UserNameScreen extends StatelessWidget {
                                       ));
                                 }
 
-                                context.push(
-                                  '/feed-page',
-                                );
+
                               },
                             ),
                           ),
@@ -151,7 +149,13 @@ class UserNameScreen extends StatelessWidget {
                     ],
                   );
                 },
-                listener: (BuildContext context, UserProfileState state) {},
+                listener: (BuildContext context, UserProfileState state) {
+                  if(state is UpdateUserProfileSuccess){
+                    context.push(
+                      '/feed-page',
+                    );
+                  }
+                },
               ),
               const Spacer(),
             ],

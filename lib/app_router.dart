@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:zatayo/model/fitness/fitness_response_model.dart';
 import 'package:zatayo/view/Profile/screen/edit_profile_screen.dart';
 import 'package:zatayo/view/Profile/screen/my_friend_screen.dart';
 import 'package:zatayo/view/Profile/screen/profile_screen.dart';
@@ -71,10 +72,17 @@ class AppRouter {
           name: "individualSports",
           path: "/individual-sports",
           builder: (context, state) => const IndividualSports()),
+
+
       GoRoute(
           name: "individualGym",
           path: "/individual-gym",
-          builder: (context, state) => const IndividualGym()),
+          builder: (context, state) {
+            final args = state.extra as FitnessDataModel;
+            return IndividualGym(
+              fitnessDataModel: args,
+            );
+          }),
       GoRoute(
           name: "subscriptionPlan",
           path: "/subscription-plan",

@@ -17,18 +17,12 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       try {
         final responseMap = await apiClient.formData("/customer/updateDetails",
             event.bodyRequest, event.image ?? Uint8List(0));
+        final response = CommonResponseModel.fromJson(responseMap.data);
 
-        if (responseMap.statusCode == 200) {
-          final Map<String, dynamic> responseData =
-              json.decode(responseMap.data);
-          if (responseData['statusCode'] == 200) {
-            emit(UpdateUserProfileSuccess(
-                commonResponseModel: responseMap.data));
-          } else {
-            emit(UpdateUserProfileFail(commonResponseModel: responseMap.data));
-          }
+        if (response.statusCode == 200) {
+          emit(UpdateUserProfileSuccess(commonResponseModel: response));
         } else {
-          emit(UpdateUserProfileFail(commonResponseModel: responseMap.data));
+          emit(UpdateUserProfileFail(commonResponseModel: response));
         }
       } catch (err) {
         emit(UpdateUserProfileFail(

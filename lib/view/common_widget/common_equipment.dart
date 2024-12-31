@@ -21,34 +21,38 @@ class CommonEquipment extends StatelessWidget {
         const SizedBox(
           width: 15,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CommonTextWidget(
-              text: title,
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-            ),
-            Row(
-              children: [
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      color: const Color(0xFFFFB23F)),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                CommonTextWidget(
-                    text: subtitle,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 11,
-                    color: const Color(0xFFFFB23F))
-              ],
-            )
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CommonTextWidget(
+                text: title,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        color: const Color(0xFFFFB23F)),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Expanded(
+                    child: CommonTextWidget(
+                        text: subtitle,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 11,
+                        color: const Color(0xFFFFB23F)),
+                  )
+                ],
+              )
+            ],
+          ),
         )
       ],
     );

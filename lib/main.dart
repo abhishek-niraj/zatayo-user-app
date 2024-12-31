@@ -4,8 +4,12 @@ import 'package:zatayo/ApiClient/api_client.dart';
 import 'package:zatayo/app_router.dart';
 import 'package:zatayo/bloc/otp_bloc/otp_bloc.dart';
 import 'package:zatayo/constant/app_theme.dart';
+import 'package:zatayo/cubit/fitness_banner/fitness_banner_cubit.dart';
 
 import 'bloc/user_profile/user_profile_bloc.dart';
+import 'cubit/customer_details/customer_details_cubit.dart';
+import 'cubit/fitness/fitness_cubit.dart';
+import 'cubit/home_page_banner/home_page_banner_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +29,26 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => UserProfileBloc(),
+        ),
+        BlocProvider(
+          create: (context) => HomePageBannerCubit(
+            ApiClient(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => FitnessBannerCubit(
+            ApiClient(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => CustomerDetailsCubit(
+            ApiClient(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => FitnessCubit(
+            ApiClient(),
+          ),
         ),
       ],
       child: MaterialApp.router(

@@ -14,12 +14,15 @@ import '../../../ApiClient/api_client.dart';
 import '../../../constant/app_color.dart';
 import '../../../cubit/home_page_banner/home_page_banner_cubit.dart';
 import '../../common_widget/common_text_widget.dart';
+import '../../feed_page/widget/header_widget.dart';
 import '../../home_work_out/screen/home_work_out.dart';
 import '../../individual_sports_gym/screen/individual_sports.dart';
 import 'package:zatayo/view/individual_sports_gym/screen/individual_gym.dart';
 import 'package:zatayo/view/notification/screen/notification_screen.dart';
 import 'package:zatayo/view/sports_places/screen/sports_places.dart';
 import 'package:zatayo/view/subscriptionplan/subscription_plan.dart';
+
+import '../widget/home_page_banner_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,92 +36,11 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: 44,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Good Morning ',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFF818898),
-                        fontSize: 14,
-                        fontFamily: 'Plus Jakarta Sans',
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: -0.28,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Hi, Abhishek Niraj !',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFFD3D1D8),
-                        fontSize: 18,
-                        fontFamily: 'Plus Jakarta Sans',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-                InkWell(
-                  onTap: () {
-                    context.push(NotificationScreen.routeName);
-                  },
-                  child: Container(
-                    width: 48,
-                    height: 48,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                            width: 1, color: Color(0xFFDFE1E7)),
-                        borderRadius: BorderRadius.circular(48),
-                      ),
-                    ),
-                    child: Stack(
-                      children: [
-                        const Positioned(
-                          left: 0,
-                          right: 0,
-                          top: 0,
-                          bottom: 0,
-                          child: Icon(
-                            Icons.notifications_none_outlined,
-                            size: 27,
-                            color: Color(0xFFF5F5F5),
-                          ),
-                        ),
-                        Positioned(
-                          left: 25,
-                          top: 15,
-                          child: Container(
-                            width: 6,
-                            height: 6,
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFFDF1C41),
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          HeaderWidget(),
           const SizedBox(
             height: 11,
           ),
-          BlocProvider(
-              create: (context) => HomePageBannerCubit(ApiClient()),
-              child: HomePageBannerWidget()),
+          HomePageBannerWidget(),
           Container(
             width: double.infinity,
             decoration: const BoxDecoration(
@@ -1262,99 +1184,3 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class HomePageBannerWidget extends StatefulWidget {
-  const HomePageBannerWidget({super.key});
-
-  @override
-  State<HomePageBannerWidget> createState() => _HomePageBannerWidgetState();
-}
-
-class _HomePageBannerWidgetState extends State<HomePageBannerWidget> {
-  @override
-  void initState() {
-    final bodyRequest = {"bannerId": "", "bannerName": "Home"};
-    context.read<HomePageBannerCubit>().fetchBanners(bodyRequest);
-    super.initState();
-  }
-
-  int currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<HomePageBannerCubit, HomePageBannerState>(
-      builder: (BuildContext context, state) {
-        if (state is HomePageBannerSuccess) {
-          final bannerData = state.bannerHomePageResponseModel.data;
-          return Stack(
-            children: [
-              CarouselSlider.builder(
-                itemCount: bannerData.length,
-                itemBuilder:
-                    (BuildContext context, int itemIndex, int pageViewIndex) =>
-                        CachedNetworkImage(
-                  filterQuality: FilterQuality.low,
-                  fit: BoxFit.cover,
-                  imageUrl: '$baseUrl/${bannerData[itemIndex].image}',
-                  placeholder: (context, url) =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                      const Center(child: Icon(Icons.error)),
-                ),
-                options: CarouselOptions(
-                  height: 350.0,
-                  animateToClosest: true,
-                  enlargeCenterPage: true,
-                  autoPlay: true,
-                  aspectRatio: 1 / 2,
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enableInfiniteScroll: true,
-                  autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-                  enlargeFactor: 0.3,
-                  viewportFraction: 1,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
-                ),
-              ),
-              Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 10,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    // Adjust the padding as needed
-                    child: Center(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          for (int i = 0; i < bannerData.length; i++)
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
-                              child: Container(
-                                height: 10, // Adjust the height
-                                width: 10, // Adjust the width
-                                decoration: BoxDecoration(
-                                  color: i == currentIndex
-                                      ? Colors.white
-                                      : Colors.grey,
-                                  borderRadius: BorderRadius.circular(
-                                      20), // Make it circular
-                                ),
-                              ),
-                            )
-                        ],
-                      ),
-                    ),
-                  ))
-            ],
-          );
-        }
-        return SizedBox();
-      },
-    );
-  }
-}

@@ -5,7 +5,7 @@ import 'package:zatayo/view/individual_sports_gym/screen/individual_sports.dart'
 
 import '../../../constant/app_color.dart';
 import '../../common_widget/common_text_widget.dart';
-import '../../individual_sports_gym/screen/individual_gym.dart';
+import '../../feed_page/widget/header_widget.dart';
 
 class SportsScreen extends StatefulWidget {
   const SportsScreen({super.key});
@@ -23,90 +23,14 @@ class _SportsScreenState extends State<SportsScreen> {
           const SizedBox(
             height: 44,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Good Morning ',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFF818898),
-                        fontSize: 14,
-                        fontFamily: 'Plus Jakarta Sans',
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: -0.28,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Hi, Abhishek Niraj !',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFFD3D1D8),
-                        fontSize: 18,
-                        fontFamily: 'Plus Jakarta Sans',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  width: 48,
-                  height: 48,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side:
-                          const BorderSide(width: 1, color: Color(0xFFDFE1E7)),
-                      borderRadius: BorderRadius.circular(48),
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      const Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: Icon(
-                          Icons.notifications_none_outlined,
-                          size: 27,
-                          color: Color(0xFFF5F5F5),
-                        ),
-                      ),
-                      Positioned(
-                        left: 25,
-                        top: 15,
-                        child: Container(
-                          width: 6,
-                          height: 6,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFFDF1C41),
-                            shape: OvalBorder(),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          HeaderWidget(),
           const SizedBox(
             height: 11,
           ),
-          Container(
-            child: Image.asset(
-              "assets/images/offer_image.png",
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ),
+          Image.asset(
+            "assets/images/offer_image.png",
+            fit: BoxFit.cover,
+            width: double.infinity,
           ),
           Container(
             width: double.infinity,

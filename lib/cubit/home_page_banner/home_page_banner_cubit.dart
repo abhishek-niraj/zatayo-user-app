@@ -14,7 +14,7 @@ class HomePageBannerCubit extends Cubit<HomePageBannerState> {
   HomePageBannerCubit(this.apiClient) : super(HomePageBannerInitial());
 
   Future<void> fetchBanners(Map<String,dynamic> bodyRequest) async {
-    emit(HomePageBannerLoading());
+    // emit(HomePageBannerLoading());
     try {
       final response = await apiClient.apiCall(
         apiEndPoint: '/banner/user/get-banner-item', // Example API endpoint

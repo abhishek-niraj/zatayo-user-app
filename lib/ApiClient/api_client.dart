@@ -4,7 +4,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:zatayo/utils/app_shared_preference_helper.dart';
 
  // const baseUrl = 'https://srv430249.hstgr.cloud/backend/api/v1';
- const baseUrl = 'http://192.168.29.248:3000';
+ const baseUrl = 'http://192.168.48.214:3000';
 class ApiClient {
   final Dio _dio;
 
@@ -41,6 +41,29 @@ class ApiClient {
       final response = await _dio.post(
         apiEndPoint ?? '',
         data: data ?? {}, // Use empty map if data is null
+      );
+      return response;
+    } catch (e) {
+      if(!kReleaseMode){
+        if (kDebugMode) {
+          print(e);
+        }
+      }
+      throw Exception('Failed to make API call: $e');
+    }
+  }
+
+
+
+  // New method for making API calls with Bearer token
+  Future<Response> apiCallGet(
+      {String? apiEndPoint, Map<String, dynamic>? data}) async {
+    String? bearerToken = await loadData();
+    try {
+      _dio.options.headers['Authorization'] = 'Bearer $bearerToken';
+
+      final response = await _dio.get(
+        apiEndPoint ?? '', // Use empty map if data is null
       );
       return response;
     } catch (e) {
