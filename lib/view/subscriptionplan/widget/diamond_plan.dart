@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import '../../common_widget/common_text_widget.dart';
 
 class DiamondPlan extends StatefulWidget {
-  const DiamondPlan({super.key});
+  final String subscriptionPlan;
+  final String price;
+
+  const DiamondPlan(
+      {required this.subscriptionPlan, required this.price, super.key});
 
   @override
   State<DiamondPlan> createState() => _DiamondPlanState();
@@ -60,7 +64,7 @@ class _DiamondPlanState extends State<DiamondPlan> {
                       fontSize: 14,
                     ),
                     CommonTextWidget(
-                      text: "₹999.00",
+                      text: "₹${widget.price}.00",
                       color: Color(0xFF665600),
                       fontSize: 23,
                       fontWeight: FontWeight.w400,
@@ -84,7 +88,7 @@ class _DiamondPlanState extends State<DiamondPlan> {
                         color: Color(0xFF444444),
                       ),
                       CommonTextWidget(
-                        text: "Diamond Subscription",
+                        text: widget.subscriptionPlan,
                         fontWeight: FontWeight.w700,
                         fontSize: 18,
                         color: Color(0xFF000000),

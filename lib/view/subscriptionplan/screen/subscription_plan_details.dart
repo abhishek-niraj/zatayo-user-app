@@ -242,6 +242,7 @@ class _SubscriptionPlanDetailsState extends State<SubscriptionPlanDetails> {
                                                     planName: widget.planDetails
                                                             ?.planName ??
                                                         '',
+                                                    price: widget.planDetails?.price ?? '0',
                                                     moneyColor: widget
                                                             .planDetails
                                                             ?.moneyColor ??

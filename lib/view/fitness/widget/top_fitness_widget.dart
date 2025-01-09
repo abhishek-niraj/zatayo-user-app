@@ -123,9 +123,11 @@ class _TopFitnessWidgetState extends State<TopFitnessWidget> {
                                 Icons.location_on_outlined,
                                 size: 30,
                               ),
-                              CommonTextWidget(
-                                text: fitnessData[index].locationName ?? '',
-                                fontWeight: FontWeight.w400,
+                              Expanded(
+                                child: CommonTextWidget(
+                                  text: fitnessData[index].locationName ?? '',
+                                  fontWeight: FontWeight.w400,
+                                ),
                               )
                             ],
                           ),

@@ -4,7 +4,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:zatayo/utils/app_shared_preference_helper.dart';
 
  // const baseUrl = 'https://srv430249.hstgr.cloud/backend/api/v1';
- const baseUrl = 'http://192.168.48.214:3000';
+ const baseUrl = 'http://192.168.29.155:3000';
 class ApiClient {
   final Dio _dio;
 

@@ -7,6 +7,7 @@ class SubscriptionPlanDetailsScreenArgument {
   final String titleNameThree;
   final Color moneyColor;
   final Color belowBoxColor;
+  final String price;
 
   SubscriptionPlanDetailsScreenArgument(
       {required this.planName,
@@ -14,5 +15,7 @@ class SubscriptionPlanDetailsScreenArgument {
       required this.titleNameTwo,
       required this.titleNameThree,
       required this.belowBoxColor,
-      required this.moneyColor});
+      required this.moneyColor,
+      required this.price
+      });
 }

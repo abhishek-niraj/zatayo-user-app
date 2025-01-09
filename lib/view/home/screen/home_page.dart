@@ -23,6 +23,7 @@ import 'package:zatayo/view/sports_places/screen/sports_places.dart';
 import 'package:zatayo/view/subscriptionplan/subscription_plan.dart';
 
 import '../widget/home_page_banner_widget.dart';
+import '../widget/subscription_plan_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -496,7 +497,8 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-
+                SubscriptionPlanWidget(),
+                SizedBox(height: 20,),
                 Column(
                   children: [
                     const Padding(
@@ -884,168 +886,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const CommonTextWidget(
-                          text: "Explore Zatayo",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                          letterSpacing: -0.3,
-                        ),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 325,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 7,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  context.push(SubscriptionPlan.routeName);
-                                },
-                                child: Container(
-                                  width: 200,
-                                  height: 307,
-                                  decoration: ShapeDecoration(
-                                    color: Colors.white.withOpacity(0.25),
-                                    shape: RoundedRectangleBorder(
-                                      side: const BorderSide(
-                                          width: 0.10, color: Colors.white),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    shadows: const [
-                                      BoxShadow(
-                                        color: Color(0x1E18274B),
-                                        blurRadius: 6.41,
-                                        offset: Offset(0, 2.85),
-                                        spreadRadius: -2.14,
-                                      ),
-                                      BoxShadow(
-                                        color: Color(0x3F000000),
-                                        blurRadius: 1.42,
-                                        offset: Offset(0, 1.42),
-                                        spreadRadius: 0,
-                                      )
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 13,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 13),
-                                        child: Container(
-                                          width: 200,
-                                          height: 158,
-                                          decoration: ShapeDecoration(
-                                            image: const DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/images/plan.png"),
-                                              fit: BoxFit.fill,
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(7.94),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Column(
-                                          children: [
-                                            const CommonTextWidget(
-                                              text: "Jatayu Home",
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 20,
-                                              letterSpacing: -0.3,
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            const CommonTextWidget(
-                                              text:
-                                                  "Unlimited access to group classes, all gyms"
-                                                  " and at-home workouts",
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
-                                            Container(
-                                              width: 200,
-                                              decoration: const ShapeDecoration(
-                                                shape: RoundedRectangleBorder(
-                                                  side: BorderSide(
-                                                    width: 0.70,
-                                                    strokeAlign: BorderSide
-                                                        .strokeAlignCenter,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
-                                            const Row(
-                                              children: [
-                                                CommonTextWidget(
-                                                  text: "₹ 1450/month ",
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 12,
-                                                ),
-                                                SizedBox(
-                                                  width: 9,
-                                                ),
-                                                Expanded(
-                                                  child: CommonTextWidget(
-                                                    text: "Ownards",
-                                                    fontWeight: FontWeight.w300,
-                                                    fontSize: 10,
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return const SizedBox(
-                                width: 10,
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+
 
                 Container(
                   width: double.infinity,

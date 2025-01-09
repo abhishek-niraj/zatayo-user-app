@@ -49,13 +49,22 @@ class _BuySubscriptionPlanState extends State<BuySubscriptionPlan> {
                   children: [
                     if (widget.planDetails?.planName != null &&
                         widget.planDetails!.planName.contains("Sliver"))
-                      SliverPlan(),
+                      SliverPlan(
+                        subscriptionPlanName: widget.planDetails!.planName,
+                        price: widget.planDetails!.price,
+                      ),
                     if (widget.planDetails?.planName != null &&
                         widget.planDetails!.planName.contains("Diamond"))
-                      DiamondPlan(),
+                      DiamondPlan(
+                        subscriptionPlan:  widget.planDetails!.planName,
+                        price:  widget.planDetails!.price,
+                      ),
                     if (widget.planDetails?.planName != null &&
                         widget.planDetails!.planName.contains("Gold"))
-                      const GoldPlan(),
+                       GoldPlan(
+                        subscriptionName:  widget.planDetails!.planName,
+                         price:  widget.planDetails!.price,
+                      ),
                     const SizedBox(
                       height: 45,
                     ),
