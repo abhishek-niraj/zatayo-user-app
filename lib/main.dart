@@ -6,11 +6,15 @@ import 'package:zatayo/bloc/otp_bloc/otp_bloc.dart';
 import 'package:zatayo/constant/app_theme.dart';
 import 'package:zatayo/cubit/fitness_banner/fitness_banner_cubit.dart';
 import 'package:zatayo/cubit/subscription_benefits/subscription_benefits_cubit.dart';
+import 'package:zatayo/cubit/subscription_plan/add_subscription_cubit.dart';
 
 import 'bloc/user_profile/user_profile_bloc.dart';
 import 'cubit/customer_details/customer_details_cubit.dart';
 import 'cubit/fitness/fitness_cubit.dart';
 import 'cubit/home_page_banner/home_page_banner_cubit.dart';
+import 'cubit/sport/get_sport_by_id_cubit.dart';
+import 'cubit/sport/get_sport_cubit.dart';
+import 'cubit/subscription_plan/buy_subscription_plan_cubit.dart';
 import 'cubit/subscription_plan/subscription_plan_cubit.dart';
 
 void main() {
@@ -57,6 +61,18 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SubscriptionBenefitsCubit(ApiClient()),
+        ),
+        BlocProvider(
+          create: (context) => AddSubscriptionCubit(),
+        ),
+        BlocProvider(
+          create: (context) => BuySubscriptionPlanCubit(ApiClient()),
+        ),
+        BlocProvider(
+          create: (context) => GetSportCubit(ApiClient()),
+        ),
+        BlocProvider(
+          create: (context) => GetSportByIdCubit(ApiClient()),
         ),
       ],
       child: MaterialApp.router(

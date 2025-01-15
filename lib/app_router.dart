@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:zatayo/model/fitness/fitness_response_model.dart';
+import 'package:zatayo/model/sport/get_sports_response_model_by_sport_id.dart';
+import 'package:zatayo/model/subscription_plan/subscription_plan_benefits_response_model.dart';
 import 'package:zatayo/view/Profile/screen/edit_profile_screen.dart';
 import 'package:zatayo/view/Profile/screen/my_friend_screen.dart';
 import 'package:zatayo/view/Profile/screen/profile_screen.dart';
@@ -29,7 +31,7 @@ class AppRouter {
       GoRoute(
         name: 'enter-phone-number',
         path: '/',
-        builder: (context, state) =>  EnterPhoneNumberScreen(),
+        builder: (context, state) => EnterPhoneNumberScreen(),
       ),
       // GoRoute(
       //     path: "/",
@@ -71,8 +73,12 @@ class AppRouter {
       GoRoute(
           name: "individualSports",
           path: "/individual-sports",
-          builder: (context, state) => const IndividualSports()),
-
+          builder: (context, state) {
+            final args = state.extra as SportsDataList;
+            return IndividualSports(
+              sportsDataList: args,
+            );
+          }),
 
       GoRoute(
           name: "individualGym",

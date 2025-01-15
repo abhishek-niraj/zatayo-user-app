@@ -3,11 +3,13 @@ import 'package:zatayo/view/common_widget/common_app_bar_widget.dart';
 import 'package:zatayo/view/common_widget/common_item.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
 
+import '../../../model/sport/get_sports_response_model_by_sport_id.dart';
 import '../../common_widget/common_equipment.dart';
 
 class IndividualSports extends StatefulWidget {
   static const String routeName = "/individual-sports";
-  const IndividualSports({super.key});
+  final SportsDataList? sportsDataList;
+  const IndividualSports({ this.sportsDataList,super.key});
 
   @override
   State<IndividualSports> createState() => _IndividualSportsState();
@@ -37,20 +39,18 @@ class _IndividualSportsState extends State<IndividualSports> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    CommonItem(),
+                    CommonItem(
+                      location: widget.sportsDataList?.locationName ?? '',
+                      name: widget.sportsDataList?.sportName ?? '',
+                      image: widget.sportsDataList?.images?[0].image ?? '',
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 22),
                       child: Column(
                         children: [
                           CommonTextWidget(
-                              text: "Planet Sports Club "
-                                  "offers top-notch facilities for boxing, swimming,"
-                                  " badminton, and football. With a professional boxing arena,"
-                                  " a modern swimming pool, high-quality badminton courts,"
-                                  " and a well-maintained football ground, we provide "
-                                  "the perfect space for sports enthusiasts to train,"
-                                  " play, and enjoy an active, healthy lifestyle."),
+                              text: widget.sportsDataList?.description ?? ''),
                           SizedBox(
                             height: 38,
                           ),

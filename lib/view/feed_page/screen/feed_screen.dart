@@ -1,26 +1,18 @@
-import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:zatayo/constant/app_color.dart';
 import 'package:zatayo/cubit/customer_details/customer_details_cubit.dart';
+import 'package:zatayo/cubit/sport/get_sport_cubit.dart';
 import 'package:zatayo/view/Profile/screen/profile_screen.dart';
 
+import '../../../cubit/sport/get_sport_by_id_cubit.dart';
 import '../../Scanner/screen/scanner_screen.dart';
-import '../../common_widget/common_text_widget.dart';
 import '../../fitness/screen/fitness_screen.dart';
 import '../../home/screen/home_page.dart';
-import '../../home_work_out/screen/home_work_out.dart';
-import '../../individual_sports_gym/screen/individual_gym.dart';
-import '../../individual_sports_gym/screen/individual_sports.dart';
-import '../../notification/screen/notification_screen.dart';
 import '../../sports/screen/sports_screen.dart';
-import '../../sports_places/screen/sports_places.dart';
-import '../../subscriptionplan/subscription_plan.dart';
 
 class HomeV2 extends StatefulWidget {
   const HomeV2({super.key});
@@ -28,6 +20,7 @@ class HomeV2 extends StatefulWidget {
   @override
   State<HomeV2> createState() => _HomeV2State();
 }
+
 class _HomeV2State extends State<HomeV2> {
   int _selectedPageIndex = 0;
 
@@ -38,13 +31,22 @@ class _HomeV2State extends State<HomeV2> {
     _pageController.dispose(); // Dispose the controller when not needed
     super.dispose();
   }
-   @override
+
+  void apiCall() {
+    context.read<CustomerDetailsCubit>().fetchCustomerDetails();
+    context.read<GetSportCubit>().fetchSports();
+  }
+
+  @override
   void initState() {
     // TODO: implement
-     context.read<CustomerDetailsCubit>().fetchCustomerDetails();
-
+    Future.microtask(() {
+      apiCall();
+      // Code to execute
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,4 +112,3 @@ class _HomeV2State extends State<HomeV2> {
     );
   }
 }
-

@@ -65,23 +65,45 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                     onTap: () {
-                                      final args =
-                                          SubscriptionPlanDetailsScreenArgument(
-                                              planName:
-                                                  subscriptionBenefits![index]
-                                                          .subscriptionName ??
-                                                      '',
-                                              price: subscriptionBenefits[index]
+                                      final args = SubscriptionPlanDetailsScreenArgument(
+                                          planName: subscriptionBenefits![index]
+                                                  .subscriptionName ??
+                                              '',
+                                          price:
+                                              subscriptionBenefits[index]
                                                       .subscriptionPrice ??
                                                   '',
-                                              titleNameOne:
-                                                  "All  GOLD  and  DIAMOND  gyms  &  sports",
-                                              titleNameTwo:
-                                                  "At  DIAMOND  gyms  &  GOLD  gyms  and  sports",
-                                              titleNameThree:
-                                                  "ALL  LIVE  classes",
-                                              moneyColor: Color(0xFF627BFC),
-                                              belowBoxColor: Color(0xFF9A9996));
+                                          titleNameOne:
+                                              "All  GOLD  and  DIAMOND  gyms  &  sports",
+                                          titleNameTwo:
+                                              "At  DIAMOND  gyms  &  GOLD  gyms  and  sports",
+                                          titleNameThree: "ALL  LIVE  classes",
+                                          moneyColor: Color(0xFF627BFC),
+                                          belowBoxColor: Color(0xFF9A9996),
+                                          subscriptionPlanBenefits:
+                                              subscriptionBenefits[index]
+                                                      .subscriptionPlanBenefits ??
+                                                  [],
+                                          subscriptionYearlyPrice:
+                                              subscriptionBenefits[index]
+                                                  .subscriptionYearlyPrice,
+                                          isOffer:
+                                              subscriptionBenefits[index]
+                                                  .isOffer,
+                                          offerDescription: subscriptionBenefits[index]
+                                              .offerDescription,
+                                          trialFor:
+                                              subscriptionBenefits[index]
+                                                  .trialFor,
+                                          offerPerCentageOnMonth:
+                                              subscriptionBenefits[index]
+                                                  .offerPerCentageOnMonth,
+                                          offerPerCentageOnYear:
+                                              subscriptionBenefits[index]
+                                                  .offerPerCentageOnYear,
+                                          subscriptionId: subscriptionBenefits[index]
+                                              .subscriptionId
+                                      );
                                       context.push(
                                           SubscriptionPlanDetails.routeName,
                                           extra: args);
@@ -111,11 +133,11 @@ class _SubscriptionPlanState extends State<SubscriptionPlan> {
                                                 .contains("Diamond"))
                                           DiamondPlan(
                                             subscriptionPlan:
-                                            subscriptionBenefits[index]
-                                                .subscriptionName ??
-                                                '',
+                                                subscriptionBenefits[index]
+                                                        .subscriptionName ??
+                                                    '',
                                             price: subscriptionBenefits[index]
-                                                .subscriptionPrice ??
+                                                    .subscriptionPrice ??
                                                 '',
                                           ),
                                         if (subscriptionBenefits?[index]

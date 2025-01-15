@@ -32,19 +32,37 @@ class Datum {
   final String? subscriptionId;
   final String? subscriptionName;
   final String? subscriptionPrice;
+  final String? subscriptionYearlyPrice;
+  final int? isOffer;
+  final String? offerDescription;
+  final int? trialFor;
+  final String? offerPerCentageOnMonth;
+  final String? offerPerCentageOnYear;
   final List<SubscriptionPlanBenefit>? subscriptionPlanBenefits;
 
   Datum({
     this.subscriptionId,
     this.subscriptionName,
+    this.subscriptionPrice,
+    this.subscriptionYearlyPrice,
+    this.isOffer,
+    this.offerDescription,
+    this.trialFor,
+    this.offerPerCentageOnMonth,
+    this.offerPerCentageOnYear,
     this.subscriptionPlanBenefits,
-    this.subscriptionPrice
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     subscriptionId: json["subscriptionId"],
     subscriptionName: json["subscriptionName"],
     subscriptionPrice: json["subscriptionPrice"],
+    subscriptionYearlyPrice: json["subscriptionYearlyPrice"],
+    isOffer: json["isOffer"],
+    offerDescription: json["offerDescription"],
+    trialFor: json["trialFor"],
+    offerPerCentageOnMonth: json["offerPerCentageOnMonth"],
+    offerPerCentageOnYear: json["offerPerCentageOnYear"],
     subscriptionPlanBenefits: json["subscriptionPlanBenefits"] == null ? [] : List<SubscriptionPlanBenefit>.from(json["subscriptionPlanBenefits"]!.map((x) => SubscriptionPlanBenefit.fromJson(x))),
   );
 
@@ -52,6 +70,12 @@ class Datum {
     "subscriptionId": subscriptionId,
     "subscriptionName": subscriptionName,
     "subscriptionPrice": subscriptionPrice,
+    "subscriptionYearlyPrice": subscriptionYearlyPrice,
+    "isOffer": isOffer,
+    "offerDescription": offerDescription,
+    "trialFor": trialFor,
+    "offerPerCentageOnMonth": offerPerCentageOnMonth,
+    "offerPerCentageOnYear": offerPerCentageOnYear,
     "subscriptionPlanBenefits": subscriptionPlanBenefits == null ? [] : List<dynamic>.from(subscriptionPlanBenefits!.map((x) => x.toJson())),
   };
 }
