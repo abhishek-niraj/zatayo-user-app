@@ -14,6 +14,7 @@ import 'cubit/fitness/fitness_cubit.dart';
 import 'cubit/home_page_banner/home_page_banner_cubit.dart';
 import 'cubit/sport/get_sport_by_id_cubit.dart';
 import 'cubit/sport/get_sport_cubit.dart';
+import 'cubit/sport/get_top_sport_cubit.dart';
 import 'cubit/subscription_plan/buy_subscription_plan_cubit.dart';
 import 'cubit/subscription_plan/subscription_plan_cubit.dart';
 
@@ -74,6 +75,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => GetSportByIdCubit(ApiClient()),
         ),
+        BlocProvider(
+          create: (context) => GetTopSportCubit(ApiClient()),
+        ),
+
       ],
       child: MaterialApp.router(
         title: 'Zatatyo',

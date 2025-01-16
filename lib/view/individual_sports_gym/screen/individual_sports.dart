@@ -9,7 +9,8 @@ import '../../common_widget/common_equipment.dart';
 class IndividualSports extends StatefulWidget {
   static const String routeName = "/individual-sports";
   final SportsDataList? sportsDataList;
-  const IndividualSports({ this.sportsDataList,super.key});
+
+  const IndividualSports({this.sportsDataList, super.key});
 
   @override
   State<IndividualSports> createState() => _IndividualSportsState();
@@ -54,44 +55,37 @@ class _IndividualSportsState extends State<IndividualSports> {
                           SizedBox(
                             height: 38,
                           ),
-                          CommonEquipment(
-                            image: 'assets/images/swimming.png',
-                            title: 'Swimming',
-                            subtitle: 'In-ground, Above-ground,Vinyl-lined',
-                          ),
-                          SizedBox(height: 8,),
-                          Divider(
-                            height: 1,
-                          ),
-                          SizedBox(height: 20,),
-                          CommonEquipment(
-                            image: 'assets/images/badminton.png',
-                            title: 'Badminton',
-                            subtitle: 'Wooden courts',
-                          ),
-                          SizedBox(height: 8,),
-                          Divider(
-                            height: 1,
-                          ),
-                          SizedBox(height: 20,),
-                          CommonEquipment(
-                            image: 'assets/images/boxing-gloves.png',
-                            title: 'Boxing',
-                            subtitle: 'Kickboxing, Mixed Martial Arts (MMA)',
-                          ),
-                          SizedBox(height: 8,),
-                          Divider(
-                            height: 1,
-                          ),
-                          SizedBox(height: 20,),
-                          CommonEquipment(
-                            image: 'assets/images/football.png',
-                            title: 'Football',
-                            subtitle: 'Firm Ground',
-                          ),
-                          SizedBox(height: 8,),
-                          Divider(
-                            height: 1,
+                          ListView.separated(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount:
+                                widget.sportsDataList?.equipmentData?.length ??
+                                    0,
+                            itemBuilder: (context, index) {
+                              final equipmentData = widget.sportsDataList?.equipmentData![index];
+                              return Column(
+                                children: [
+                                  CommonEquipment(
+                                    image: 'assets/images/swimming.png',
+                                    title: equipmentData?.equipment ?? '',
+                                    subtitle:
+                                    equipmentData?.description ?? '',
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Divider(
+                                    height: 1,
+                                  ),
+                                ],
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                height: 8,
+                              );
+                            },
                           )
                         ],
                       ),

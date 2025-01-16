@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zatayo/constant/app_color.dart';
 import 'package:zatayo/cubit/customer_details/customer_details_cubit.dart';
 import 'package:zatayo/cubit/sport/get_sport_cubit.dart';
+import 'package:zatayo/cubit/sport/get_top_sport_cubit.dart';
 import 'package:zatayo/view/Profile/screen/profile_screen.dart';
 
 import '../../../cubit/sport/get_sport_by_id_cubit.dart';
@@ -35,6 +36,7 @@ class _HomeV2State extends State<HomeV2> {
   void apiCall() {
     context.read<CustomerDetailsCubit>().fetchCustomerDetails();
     context.read<GetSportCubit>().fetchSports();
+    context.read<GetTopSportCubit>().fetchTopSports();
   }
 
   @override
