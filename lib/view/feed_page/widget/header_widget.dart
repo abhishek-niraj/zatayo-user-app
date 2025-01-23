@@ -5,6 +5,7 @@ import 'package:zatayo/cubit/customer_details/customer_details_cubit.dart';
 import 'package:zatayo/cubit/customer_details/customer_details_state.dart';
 
 import '../../notification/screen/notification_screen.dart';
+import '../../pick_an_area/screen/pick_an_area_screen.dart';
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
 
@@ -50,7 +51,8 @@ class HeaderWidget extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              context.push(NotificationScreen.routeName);
+              // context.push(NotificationScreen.routeName);
+              context.push(PickAnAreaScreen.routeName);
             },
             child: Container(
               width: 48,
@@ -71,7 +73,7 @@ class HeaderWidget extends StatelessWidget {
                     top: 0,
                     bottom: 0,
                     child: Icon(
-                      Icons.notifications_none_outlined,
+                      Icons.search,
                       size: 27,
                       color: Color(0xFFF5F5F5),
                     ),

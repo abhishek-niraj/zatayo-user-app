@@ -24,7 +24,8 @@ class _FitnessScreenState extends State<FitnessScreen> {
 
   @override
   void initState() {
-    context.read<FitnessCubit>().fetchFitness();
+    final city = "";
+    context.read<FitnessCubit>().fetchFitness(city);
     super.initState();
   }
 
@@ -80,8 +81,10 @@ class _FitnessScreenState extends State<FitnessScreen> {
                     ],
                   ),
                 ),
-
-                TopFitnessWidget(),
+                const SizedBox(
+                  height: 20,
+                ),
+                  TopFitnessWidget(),
 
                 /******************** Top Fitness gym ********************/
 

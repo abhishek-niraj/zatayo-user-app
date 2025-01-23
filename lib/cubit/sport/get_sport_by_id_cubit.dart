@@ -13,7 +13,7 @@ class GetSportByIdCubit extends Cubit<GetSportBySportIdState> {
 
   GetSportByIdCubit(this.apiClient) : super(GetSportBySportIdInitial());
 
-  Future<void> fetchSports(bodyRequest) async {
+  Future<void> fetchSportsBySportId(bodyRequest) async {
     // emit(FitnessBannerLoading());
     try {
       final response = await apiClient.apiCall(

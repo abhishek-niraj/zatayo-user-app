@@ -16,6 +16,7 @@ import 'package:zatayo/view/login/screen/user_name_screen.dart';
 import 'package:zatayo/view/login/screen/verify_otp_screen.dart';
 import 'package:zatayo/view/near_by_gym/screen/near_by_gyms.dart';
 import 'package:zatayo/view/notification/screen/notification_screen.dart';
+import 'package:zatayo/view/pick_an_area/screen/pick_an_area_screen.dart';
 import 'package:zatayo/view/sports_places/screen/sports_places.dart';
 import 'package:zatayo/view/subscriptionplan/screen/buy_subscription_plan.dart';
 import 'package:zatayo/view/subscriptionplan/screen/subscription_plan_details.dart';
@@ -144,6 +145,13 @@ class AppRouter {
         path: "/watch-home-work-out",
         builder: (context, state) {
           return const WatchHomeWorkOut();
+        },
+      ),
+      GoRoute(
+        name: "pickAnArea",
+        path: "/pick-an-area",
+        builder: (context, state) {
+          return const PickAnAreaScreen();
         },
       ),
     ],

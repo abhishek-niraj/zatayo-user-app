@@ -1,8 +1,12 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
 
 import '../../../constant/app_color.dart';
+import '../../../cubit/center/select_center_cubit.dart';
 import '../../../cubit/sport/get_sport_by_id_cubit.dart';
 import '../../../cubit/sport/get_sport_cubit.dart';
 import '../../../cubit/sport/get_sports_state.dart';
@@ -16,21 +20,60 @@ class SportsBannerWidget extends StatefulWidget {
 
 class _SportsBannerWidgetState extends State<SportsBannerWidget> {
   int? selectedIndex;
+  StreamSubscription? _subscription;
 
-  void apiCall(id,index) {
+  void apiCall(id, index) {
     Future.microtask(() {
-      selectedSport(id,index);
+      selectedSport(id, index);
     });
   }
 
-  void selectedSport(id ,index) {
-
-    final bodyRequest = {"sportId": id};
-    context.read<GetSportByIdCubit>().fetchSports(bodyRequest);
+  void selectedSport(id, index) {
+    final selectedCenter = context.read<SelectCenterCubit>();
+    selectedCenter.selectCenter(sportId: id);
 
     setState(() {
       selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    final selectedCenter = context.read<SelectCenterCubit>().state;
+    if (selectedCenter.centerName != null || selectedCenter.sportId != null) {
+      callAPi(selectedCenter.sportId ?? '', selectedCenter.centerName ?? '');
+    }
+    _subscription = context.read<SelectCenterCubit>().stream.listen((data) {
+
+      if (mounted) {
+        callAPi(data.sportId ?? '', data.centerName ?? '');
+      }
+    });
+
+    super.initState();
+  }
+
+  void callAPi(String sportId, String centerName) {
+    if (!mounted) return; // Ensure the widget is still mounted
+    final bodyRequest = {
+      "sportId":sportId ?? '',
+      "city": centerName ?? ''
+    };
+    context.read<GetSportByIdCubit>().fetchSportsBySportId(bodyRequest);
+    // Perform API call logic here
+    if (!kReleaseMode) {
+      if (kDebugMode) {
+        print("API called with sportId: $sportId, centerName: $centerName");
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _subscription?.cancel();
+    super.dispose();
   }
 
   @override
@@ -48,7 +91,7 @@ class _SportsBannerWidgetState extends State<SportsBannerWidget> {
                 for (int i = 0; i < sports!.length; i++)
                   InkWell(
                     onTap: () {
-                      apiCall(sports[i].sportId,i);
+                      apiCall(sports[i].sportId, i);
                     },
                     child: Container(
                       width: 100,

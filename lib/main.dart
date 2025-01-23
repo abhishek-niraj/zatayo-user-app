@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Import Flutter Bloc package
 import 'package:zatayo/ApiClient/api_client.dart';
 import 'package:zatayo/app_router.dart';
@@ -9,7 +10,10 @@ import 'package:zatayo/cubit/subscription_benefits/subscription_benefits_cubit.d
 import 'package:zatayo/cubit/subscription_plan/add_subscription_cubit.dart';
 
 import 'bloc/user_profile/user_profile_bloc.dart';
+import 'cubit/center/get_center_cubit.dart';
+import 'cubit/center/select_center_cubit.dart';
 import 'cubit/customer_details/customer_details_cubit.dart';
+import 'cubit/deal_of_day/get_deal_of_day_cubit.dart';
 import 'cubit/fitness/fitness_cubit.dart';
 import 'cubit/home_page_banner/home_page_banner_cubit.dart';
 import 'cubit/sport/get_sport_by_id_cubit.dart';
@@ -19,11 +23,16 @@ import 'cubit/subscription_plan/buy_subscription_plan_cubit.dart';
 import 'cubit/subscription_plan/subscription_plan_cubit.dart';
 
 void main() {
-  runApp(const MyApp());
+  final apiClient = ApiClient();
+  runApp(MyApp(
+    apiClient: apiClient,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ApiClient apiClient;
+
+  const MyApp({required this.apiClient, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +40,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => OtpBloc(
-            ApiClient(),
+            apiClient,
           ),
         ),
         BlocProvider(
@@ -39,46 +48,54 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => HomePageBannerCubit(
-            ApiClient(),
+            apiClient,
           ),
         ),
         BlocProvider(
           create: (context) => FitnessBannerCubit(
-            ApiClient(),
+            apiClient,
           ),
         ),
         BlocProvider(
           create: (context) => CustomerDetailsCubit(
-            ApiClient(),
+            apiClient,
           ),
         ),
         BlocProvider(
           create: (context) => FitnessCubit(
-            ApiClient(),
+            apiClient,
           ),
         ),
         BlocProvider(
-          create: (context) => SubscriptionPlanCubit(ApiClient()),
+          create: (context) => SubscriptionPlanCubit(apiClient),
         ),
         BlocProvider(
-          create: (context) => SubscriptionBenefitsCubit(ApiClient()),
+          create: (context) => SubscriptionBenefitsCubit(apiClient),
         ),
         BlocProvider(
           create: (context) => AddSubscriptionCubit(),
         ),
         BlocProvider(
-          create: (context) => BuySubscriptionPlanCubit(ApiClient()),
+          create: (context) => BuySubscriptionPlanCubit(apiClient),
         ),
         BlocProvider(
-          create: (context) => GetSportCubit(ApiClient()),
+          create: (context) => GetSportCubit(apiClient),
         ),
         BlocProvider(
-          create: (context) => GetSportByIdCubit(ApiClient()),
+          create: (context) => GetSportByIdCubit(apiClient),
         ),
         BlocProvider(
-          create: (context) => GetTopSportCubit(ApiClient()),
+          create: (context) => GetTopSportCubit(apiClient),
         ),
-
+        BlocProvider(
+          create: (context) => GetCenterCubit(apiClient),
+        ),
+        BlocProvider(
+          create: (context) => SelectCenterCubit(),
+        ),
+        BlocProvider(
+          create: (context) => GetDealOfDayCubit(apiClient),
+        ),
       ],
       child: MaterialApp.router(
         title: 'Zatatyo',

@@ -26,7 +26,6 @@ class _TopFitnessWidgetState extends State<TopFitnessWidget> {
           final fitnessData = state.fitnessResponseModel.data;
           return Column(
             children: [
-              SizedBox(height: 20,),
               ListView.builder(
                 padding: EdgeInsets.all(0),
                 shrinkWrap: true,

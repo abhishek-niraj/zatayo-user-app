@@ -1,4 +1,3 @@
-
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +8,10 @@ import 'package:zatayo/cubit/sport/get_sport_cubit.dart';
 import 'package:zatayo/cubit/sport/get_top_sport_cubit.dart';
 import 'package:zatayo/view/Profile/screen/profile_screen.dart';
 
+import '../../../cubit/center/select_center_cubit.dart';
+import '../../../cubit/deal_of_day/get_deal_of_day_cubit.dart';
 import '../../../cubit/sport/get_sport_by_id_cubit.dart';
+import '../../../utils/app_shared_preference_helper.dart';
 import '../../Scanner/screen/scanner_screen.dart';
 import '../../fitness/screen/fitness_screen.dart';
 import '../../home/screen/home_page.dart';
@@ -37,6 +39,18 @@ class _HomeV2State extends State<HomeV2> {
     context.read<CustomerDetailsCubit>().fetchCustomerDetails();
     context.read<GetSportCubit>().fetchSports();
     context.read<GetTopSportCubit>().fetchTopSports();
+    getDataFromSharedPreference();
+    context.read<GetDealOfDayCubit>().fetchDealOfDay();
+
+  }
+
+  getDataFromSharedPreference() async {
+    final centerName =
+        await AppSharedPreferenceHelper().getCustomerData("centerName");
+
+    if (mounted) {
+      context.read<SelectCenterCubit>().selectCenter(centerName: centerName);
+    }
   }
 
   @override
