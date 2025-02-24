@@ -52,7 +52,7 @@ class _FitnessBannerWidgetState extends State<FitnessBannerWidget> {
                   aspectRatio: 1 / 2,
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enableInfiniteScroll: true,
-                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 1000),
                   enlargeFactor: 0.3,
                   viewportFraction: 1,
                   onPageChanged: (index, reason) {
@@ -62,6 +62,7 @@ class _FitnessBannerWidgetState extends State<FitnessBannerWidget> {
                   },
                 ),
               ),
+
               Positioned(
                   left: 0,
                   right: 0,

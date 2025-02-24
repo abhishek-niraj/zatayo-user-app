@@ -36,43 +36,63 @@ class _SportsBannerWidgetState extends State<SportsBannerWidget> {
       selectedIndex = index;
     });
   }
+  Timer? _debounce;
+  String? _lastSportId;
+  String? _lastCenterName;
 
   @override
   void initState() {
-    // TODO: implement initState
-    final selectedCenter = context.read<SelectCenterCubit>().state;
-    if (selectedCenter.centerName != null || selectedCenter.sportId != null) {
-      callAPi(selectedCenter.sportId ?? '', selectedCenter.centerName ?? '');
-    }
-    _subscription = context.read<SelectCenterCubit>().stream.listen((data) {
-
-      if (mounted) {
-        callAPi(data.sportId ?? '', data.centerName ?? '');
-      }
-    });
-
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final selectedCenter = context.read<SelectCenterCubit>().state;
+
+      // if (_shouldCallApi(selectedCenter.sportId, selectedCenter.centerName)) {
+      //   callAPi(selectedCenter.sportId!, selectedCenter.centerName!);
+      // }
+
+      _subscription = context.read<SelectCenterCubit>().stream.listen((data) {
+        if (mounted) {
+          _debounce?.cancel(); // Cancel previous debounce timer
+
+          _debounce = Timer(const Duration(milliseconds: 500), () {
+            if (_shouldCallApi(data.sportId, data.centerName)) {
+              callAPi(data.sportId!, data.centerName!);
+            }
+          });
+        }
+      });
+    });
+  }
+
+  bool _shouldCallApi(String? sportId, String? centerName) {
+    if (sportId == null || centerName == null) return false;
+    if (sportId == _lastSportId && centerName == _lastCenterName) return false;
+
+    _lastSportId = sportId;
+    _lastCenterName = centerName;
+    return true;
   }
 
   void callAPi(String sportId, String centerName) {
-    if (!mounted) return; // Ensure the widget is still mounted
+    if (!mounted) return;
+
     final bodyRequest = {
-      "sportId":sportId ?? '',
-      "city": centerName ?? ''
+      "sportId": sportId,
+      "city": centerName
     };
+
     context.read<GetSportByIdCubit>().fetchSportsBySportId(bodyRequest);
-    // Perform API call logic here
-    if (!kReleaseMode) {
-      if (kDebugMode) {
-        print("API called with sportId: $sportId, centerName: $centerName");
-      }
+
+    if (kDebugMode) {
+      print("API called with sportId: $sportId, centerName: $centerName");
     }
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _subscription?.cancel();
+    _debounce?.cancel(); // Cancel debounce timer
     super.dispose();
   }
 

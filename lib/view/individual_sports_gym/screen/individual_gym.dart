@@ -41,7 +41,7 @@ class _IndividualGymState extends State<IndividualGym> {
                 child: Column(
                   children: [
                     CommonItem(
-                      image: widget.fitnessDataModel?.images?.first.image ?? '',
+                      image: widget.fitnessDataModel?.images ?? [],
                       name: widget.fitnessDataModel?.name ?? '',
                       location: widget.fitnessDataModel?.locationName ?? '',
                     ),

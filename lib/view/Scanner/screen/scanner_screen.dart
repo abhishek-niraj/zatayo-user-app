@@ -120,25 +120,22 @@ class _ScannerScreenState extends State<ScannerScreen> {
               right: 0,
               child: Align(
                 alignment: Alignment.center,
-                child: CommonTextWidget(text: 'Scan you QR Code',
+                child: CommonTextWidget(
+                  text: 'Scan your QR Code',
                   fontSize: 23,
                   fontWeight: FontWeight.w900,
                 ),
               )),
-          if(controller.barcodes.length != 0)
-          Positioned(
-            width: media.width,
-            height: 50,
-            bottom: 40,
-
-
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: ScannedBarcodeLabel(barcodes: controller.barcodes),
+          if (controller.barcodes.length != 0)
+            Positioned(
+              width: media.width,
+              height: 50,
+              bottom: 40,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: ScannedBarcodeLabel(barcodes: controller.barcodes),
+              ),
             ),
-          ),
-
-
         ],
       ),
     );
@@ -146,12 +143,13 @@ class _ScannerScreenState extends State<ScannerScreen> {
 
   @override
   Future<void> dispose() async {
-    print("*************************");
+    if (kDebugMode) {
+      print("*************************");
+    }
     super.dispose();
     await controller.dispose();
   }
 }
-
 
 class ScannerOverlay extends CustomPainter {
   ScannerOverlay(this.scanWindow);

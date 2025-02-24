@@ -8,6 +8,7 @@ import 'package:zatayo/bloc/user_profile/user_profile_state.dart';
 import 'package:zatayo/view/common_widget/common_button_widget.dart';
 import 'package:zatayo/view/common_widget/common_text_field_widget.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
+import 'package:zatayo/view/pick_an_area/screen/pick_an_area_screen.dart';
 
 import '../../../constant/app_color.dart';
 
@@ -151,9 +152,8 @@ class UserNameScreen extends StatelessWidget {
                 },
                 listener: (BuildContext context, UserProfileState state) {
                   if(state is UpdateUserProfileSuccess){
-                    context.push(
-                      '/feed-page',
-                    );
+                    context.push(PickAnAreaScreen.routeName);
+
                   }
                 },
               ),

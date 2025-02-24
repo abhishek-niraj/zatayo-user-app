@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Import Flutter Bloc package
 import 'package:zatayo/ApiClient/api_client.dart';
 import 'package:zatayo/app_router.dart';
-import 'package:zatayo/bloc/otp_bloc/otp_bloc.dart';
 import 'package:zatayo/constant/app_theme.dart';
 import 'package:zatayo/cubit/fitness_banner/fitness_banner_cubit.dart';
+import 'package:zatayo/cubit/scann_bar_code/scan_bar_code_cubit.dart';
 import 'package:zatayo/cubit/subscription_benefits/subscription_benefits_cubit.dart';
 import 'package:zatayo/cubit/subscription_plan/add_subscription_cubit.dart';
-
+import 'package:zatayo/general_bloc_provider.dart';
+import 'bloc/otp_bloc/otp_bloc.dart';
 import 'bloc/user_profile/user_profile_bloc.dart';
 import 'cubit/center/get_center_cubit.dart';
 import 'cubit/center/select_center_cubit.dart';
 import 'cubit/customer_details/customer_details_cubit.dart';
+import 'cubit/customer_details/user_selected_location_information_cubit.dart';
 import 'cubit/deal_of_day/get_deal_of_day_cubit.dart';
 import 'cubit/fitness/fitness_cubit.dart';
 import 'cubit/home_page_banner/home_page_banner_cubit.dart';
@@ -96,6 +97,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => GetDealOfDayCubit(apiClient),
         ),
+        BlocProvider(create: (context) => ScanBarCodeCubit(apiClient)),
+        BlocProvider(
+            create: (context) => UserSelectedLocationInformationCubit())
       ],
       child: MaterialApp.router(
         title: 'Zatatyo',

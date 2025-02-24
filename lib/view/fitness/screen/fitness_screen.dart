@@ -24,8 +24,11 @@ class _FitnessScreenState extends State<FitnessScreen> {
 
   @override
   void initState() {
-    final city = "";
-    context.read<FitnessCubit>().fetchFitness(city);
+     final bodyRequest = {
+       "sportId":"",
+       "city":""
+     };
+    context.read<FitnessCubit>().fetchFitness(bodyRequest);
     super.initState();
   }
 

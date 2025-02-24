@@ -4,7 +4,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:zatayo/utils/app_shared_preference_helper.dart';
 
  // const baseUrl = 'https://srv430249.hstgr.cloud/backend/api/v1';
- const baseUrl = 'http://192.168.92.214:3000';
+ const baseUrl = 'http://192.168.29.155:9000';
 class ApiClient {
   final Dio _dio;
 
@@ -112,8 +112,12 @@ class ApiClient {
         options:
             Options(contentType: 'multipart/form-data'), // Set content type
       );
-      print("Resposne");
-      print(response);
+      if (kDebugMode) {
+        print("Resposne");
+      }
+      if (kDebugMode) {
+        print(response);
+      }
       print("Response");
       return response;
     } catch (error) {

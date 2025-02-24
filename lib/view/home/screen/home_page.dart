@@ -11,6 +11,7 @@ import 'package:zatayo/cubit/home_page_banner/home_page_banner_state.dart';
 import 'package:zatayo/view/common_widget/common_container_widget.dart';
 import 'package:zatayo/view/home/widget/deal_of_day_widget.dart';
 import 'package:zatayo/view/pick_an_area/screen/pick_an_area_screen.dart';
+import 'package:zatayo/view/play_sports/screen/play_sports_screen.dart';
 
 import '../../../ApiClient/api_client.dart';
 import '../../../constant/app_color.dart';
@@ -90,7 +91,8 @@ class HomePage extends StatelessWidget {
                       // Play Sports
                       InkWell(
                         onTap: () {
-                          context.push("/sport-places");
+                          context.push(PlaySportsScreen.routeName);
+                          // context.push("/sport-places");
                         },
                         child: Column(
                           children: [

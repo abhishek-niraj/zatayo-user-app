@@ -43,7 +43,7 @@ class _IndividualSportsState extends State<IndividualSports> {
                     CommonItem(
                       location: widget.sportsDataList?.locationName ?? '',
                       name: widget.sportsDataList?.sportName ?? '',
-                      image: widget.sportsDataList?.images?[0].image ?? '',
+                      image: widget.sportsDataList?.images ?? [],
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(

@@ -11,11 +11,12 @@ class FitnessCubit extends Cubit<FitnessState> {
 
   FitnessCubit(this.apiClient) : super(GetFitnessInitial());
 
-  Future<void> fetchFitness(city) async {
+  Future<void> fetchFitness(bodyRequest) async {
     // emit(FitnessBannerLoading());
     try {
-      final response = await apiClient.apiCallGet(
-        apiEndPoint: '/fitness/user/get-fitness?city= $city', // Example API endpoint
+      final response = await apiClient.apiCall(
+        apiEndPoint: '/merchant-sports/user/get-sport-fitness',
+        data: bodyRequest
       );
        if(response.statusCode == 200){
          final fitnessResponse = FitnessResponseModel.fromJson(response.data);

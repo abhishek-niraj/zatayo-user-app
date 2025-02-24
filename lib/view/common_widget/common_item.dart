@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../ApiClient/api_client.dart';
 import 'common_text_widget.dart';
 
 class CommonItem extends StatefulWidget {
-  final String? image;
+  final List? image;
   final String? name;
   final String? location;
 
@@ -34,20 +35,36 @@ class _CommonItemState extends State<CommonItem> {
               borderRadius:
               BorderRadius.circular(
                   0),
-              child: CachedNetworkImage(
-                imageUrl: "$baseUrl/${widget.image ?? ''}",
-                fit: BoxFit.cover,
-                placeholder: (context,
-                    url) =>
-                const Center(
-                    child:
-                    CircularProgressIndicator(
-                      strokeWidth: 1,
-                    )),
-                errorWidget: (context,
-                    url, error) =>
-                const Icon(
-                    Icons.error),
+              child:  CarouselSlider.builder(
+                itemCount: widget.image?.length ?? 0,
+                itemBuilder:
+                    (BuildContext context, int itemIndex, int pageViewIndex) =>
+                    CachedNetworkImage(
+                      filterQuality: FilterQuality.low,
+                      fit: BoxFit.cover,
+                      imageUrl: '$baseUrl/${ widget.image?[itemIndex].image}',
+                      placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) =>
+                      const Center(child: Icon(Icons.error)),
+                    ),
+                options: CarouselOptions(
+
+                  animateToClosest: true,
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  aspectRatio: 1 / 2,
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enableInfiniteScroll: true,
+                  autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+                  enlargeFactor: 0.3,
+                  viewportFraction: 1,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      // currentIndex = index;
+                    });
+                  },
+                ),
               ),
             ),
           ),
