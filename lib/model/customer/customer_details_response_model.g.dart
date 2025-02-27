@@ -37,6 +37,8 @@ CustomerDetailsData _$CustomerDetailsDataFromJson(Map<String, dynamic> json) =>
       role: json['role'] as String?,
       isAcceptReferralCode: json['isAcceptReferralCode'] as String?,
       planName: json['planName'] as String?,
+      height: json['height'] as String?,
+      weight: json['weight'] as String?,
     );
 
 Map<String, dynamic> _$CustomerDetailsDataToJson(
@@ -55,4 +57,6 @@ Map<String, dynamic> _$CustomerDetailsDataToJson(
       'role': instance.role,
       'isAcceptReferralCode': instance.isAcceptReferralCode,
       'planName': instance.planName,
+      'height': instance.height,
+      'weight': instance.weight,
     };

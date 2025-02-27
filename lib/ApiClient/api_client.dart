@@ -96,7 +96,7 @@ class ApiClient {
     // Create FormData object for multipart request
     FormData formData = FormData.fromMap({
       ...body, // Add form fields
-      'image': MultipartFile.fromBytes(
+      'profileImage': MultipartFile.fromBytes(
         image,
         filename: 'image.jpg',
         contentType:

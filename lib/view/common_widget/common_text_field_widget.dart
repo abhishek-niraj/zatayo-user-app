@@ -9,7 +9,7 @@ class CommonTextFieldWidget extends StatelessWidget {
   final TextInputType keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final Function(String)? onSubmitted; // For handling text submission
-
+  final Function (String) ? onChange;
   const CommonTextFieldWidget({
     super.key,
     this.hintText = '',
@@ -18,7 +18,8 @@ class CommonTextFieldWidget extends StatelessWidget {
     this.maxLength,
     this.keyboardType = TextInputType.text, // Default to text
     this.inputFormatters,
-    this.onSubmitted
+    this.onSubmitted,
+    this.onChange
   });
 
   @override
@@ -30,6 +31,7 @@ class CommonTextFieldWidget extends StatelessWidget {
       maxLength: maxLength, // Set character limit
       style: const TextStyle(color: Colors.white),
       onSubmitted: onSubmitted,
+      onChanged: onChange,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon,

@@ -16,6 +16,7 @@ class CustomerDetailsCubit extends Cubit<CustomerDetailsState> {
       final response = await apiClient.apiCall(
           apiEndPoint: '/customer/get-customer', // Example API endpoint
           );
+      print(response.data);
       final bannerResponse =
           CustomerDetailsResponseModel.fromJson(response.data);
 

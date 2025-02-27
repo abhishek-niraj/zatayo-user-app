@@ -75,15 +75,15 @@ class _CircularBorderWidgetState extends State<CircularBorderWidget> {
             size: Size(90, 90),
             painter: CircularBorderPainter(widget.progress),
           ),
-          Align(
-            alignment: Alignment.center,
-            child: Positioned(
+          Positioned(
+              child: Align(
+                alignment: Alignment.center,
                 child: CommonTextWidget(
-              text: widget.completedText,
-              fontWeight: FontWeight.w900,
-              fontSize: 25,
-            )),
-          ),
+                            text: widget.completedText,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 25,
+                          ),
+              )),
         ],
       ),
     );

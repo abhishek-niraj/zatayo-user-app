@@ -27,6 +27,8 @@ class CustomerDetailsData {
   final String? role;
   final String? isAcceptReferralCode;
   final String? planName;
+  final String? height;
+  final String? weight;
 
   CustomerDetailsData({
     this.id,
@@ -42,6 +44,8 @@ class CustomerDetailsData {
     this.role,
     this.isAcceptReferralCode,
     this.planName,
+    this.height,
+    this.weight
   });
   factory CustomerDetailsData.fromJson(Map<String,dynamic> json)=>
       _$CustomerDetailsDataFromJson(json);

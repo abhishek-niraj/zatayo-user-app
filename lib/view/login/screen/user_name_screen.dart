@@ -151,9 +151,8 @@ class UserNameScreen extends StatelessWidget {
                   );
                 },
                 listener: (BuildContext context, UserProfileState state) {
-                  if(state is UpdateUserProfileSuccess){
+                  if (state is UpdateUserProfileSuccess && ModalRoute.of(context)?.isCurrent == true) {
                     context.push(PickAnAreaScreen.routeName);
-
                   }
                 },
               ),

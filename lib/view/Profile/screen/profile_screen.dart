@@ -1,9 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zatayo/constant/app_color.dart';
 import 'package:zatayo/view/common_widget/common_container_widget.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
 
+import '../../../ApiClient/api_client.dart';
+import '../../../cubit/customer_details/customer_details_cubit.dart';
+import '../../../cubit/customer_details/customer_details_state.dart';
 import '../widget/circular_progress_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -45,9 +50,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
-                              child: CommonTextWidget(text: 'Profile',
-                              fontSize: 20,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: CommonTextWidget(
+                                text: 'Profile',
+                                fontSize: 20,
                                 fontWeight: FontWeight.w900,
                               ),
                             )
@@ -56,69 +63,98 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5),
-                              child: ContainerWidget(
-                                borderRadius: 100,
-                                height: 98,
-                                width: 98,
-                                backgroundColor: Colors.transparent,
-                                borderWidth: 0,
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(56),
-                                    child: Image.asset("assets/images/profile.png")),
-                              ),
-                            ),
-
-                            Expanded(
-                              child: Column(
+                        BlocBuilder<CustomerDetailsCubit, CustomerDetailsState>(
+                          builder: (BuildContext context, state) {
+                            if (state is GetCustomerDetailSuccess) {
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
-
                                 children: [
-                                  CommonTextWidget(text: "23"),
-                                  CommonTextWidget(text: 'Sports visited',
-                                   textAlign: TextAlign.center,
-                                  )
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 5),
+                                    child: ContainerWidget(
+                                        borderRadius: 100,
+                                        height: 98,
+                                        width: 98,
+                                        backgroundColor: Colors.transparent,
+                                        borderWidth: 0,
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(56),
+                                            child: state
+                                                    .customerDetailsResponseModel
+                                                    .data!
+                                                    .first
+                                                    .profileImage!
+                                                    .isNotEmpty
+                                                ? Image.network(
+                                                    "$baseUrl/${state.customerDetailsResponseModel.data!.first.profileImage ?? ''}",
+                                                  )
+                                                : Image.asset(
+                                                    "assets/images/profile.png"))),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        CommonTextWidget(text: "23"),
+                                        CommonTextWidget(
+                                          text: 'Sports visited',
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        CommonTextWidget(text: "23"),
+                                        CommonTextWidget(
+                                          text: 'Friends',
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        CommonTextWidget(text: "23"),
+                                        CommonTextWidget(
+                                          text: 'Reviews',
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                 ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  CommonTextWidget(text: "23"),
-                                  CommonTextWidget(text: 'Friends',
-                                    textAlign: TextAlign.center,
-                                  )
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  CommonTextWidget(text: "23"),
-                                  CommonTextWidget(text: 'Reviews',
-                                    textAlign: TextAlign.center,
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
+                              );
+                            }
+                            return SizedBox();
+                          },
                         ),
-
                         SizedBox(
                           height: 30,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CommonTextWidget(
-                              text: "Abhijeet Mishra",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 21,
+                            BlocBuilder<CustomerDetailsCubit,
+                                CustomerDetailsState>(
+                              builder: (BuildContext context, state) {
+                                if (state is GetCustomerDetailSuccess) {
+                                  return CommonTextWidget(
+                                    text:
+                                        '${state.customerDetailsResponseModel.data?.first.name}',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 21,
+                                  );
+                                }
+                                return SizedBox();
+                              },
                             ),
                             InkWell(
                               onTap: () {
@@ -133,13 +169,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ],
                         ),
-
                         SizedBox(
                           height: 50,
                         ),
                         Container(
                           width: double.infinity,
-
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             gradient: LinearGradient(
@@ -152,7 +186,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20,),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 20,
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -160,39 +196,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                         Row(
-                                           children: [
-                                             Expanded(
-                                               child: CommonTextWidget(text: "Membership",
-                                               color: Color(0xFF444444),
-                                                 fontWeight: FontWeight.w600,
-                                                 overflow: TextOverflow.ellipsis,
-                                               ),
-                                             ),
-                                           ],
-                                         ),
                                         Row(
                                           children: [
                                             Expanded(
-                                              child: CommonTextWidget(text: "Gold Subscription",
-                                              fontSize: 18,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 17,),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: CommonTextWidget(text: "Diamond Sport's visited",
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
+                                              child: CommonTextWidget(
+                                                text: "Membership",
+                                                color: Color(0xFF444444),
+                                                fontWeight: FontWeight.w600,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
@@ -201,15 +216,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         Row(
                                           children: [
                                             Expanded(
-                                              child: CommonTextWidget(text: "Enjoy unlimited visits to Sliver Sport",
-                                              color: Colors.black,
+                                              child: CommonTextWidget(
+                                                text: "Gold Subscription",
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.black,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 17,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: CommonTextWidget(
+                                                text: "Diamond Sport's visited",
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.black,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: CommonTextWidget(
+                                                text:
+                                                    "Enjoy unlimited visits to Sliver Sport",
+                                                color: Colors.black,
                                                 overflow: TextOverflow.visible,
                                               ),
                                             ),
                                           ],
                                         ),
-
-
                                       ],
                                     ),
                                   ),
@@ -221,7 +264,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     completedText: "3/5",
                                   ),
                                 ),
-
                               ],
                             ),
                           ),
@@ -238,6 +280,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-
-
-

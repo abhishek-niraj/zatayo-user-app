@@ -6,12 +6,13 @@ import 'package:zatayo/cubit/customer_details/customer_details_state.dart';
 
 import '../../notification/screen/notification_screen.dart';
 import '../../pick_an_area/screen/pick_an_area_screen.dart';
+
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,21 +33,23 @@ class HeaderWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 4),
-              BlocBuilder<CustomerDetailsCubit,CustomerDetailsState>(builder: (BuildContext context,  state) {
-                if(state is GetCustomerDetailSuccess){
-                  return Text(
-                    'Hi, ${state.customerDetailsResponseModel.data?.first.name} !',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFFD3D1D8),
-                      fontSize: 18,
-                      fontFamily: 'Plus Jakarta Sans',
-                      fontWeight: FontWeight.w700,
-                    ),
-                  );
-                }
-                return SizedBox();
-              },)
+              BlocBuilder<CustomerDetailsCubit, CustomerDetailsState>(
+                builder: (BuildContext context, state) {
+                  if (state is GetCustomerDetailSuccess) {
+                    return Text(
+                      'Hi, ${state.customerDetailsResponseModel.data?.first.name} !',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFFD3D1D8),
+                        fontSize: 18,
+                        fontFamily: 'Plus Jakarta Sans',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    );
+                  }
+                  return SizedBox();
+                },
+              )
             ],
           ),
           InkWell(
@@ -60,8 +63,7 @@ class HeaderWidget extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                      width: 1, color: Color(0xFFDFE1E7)),
+                  side: const BorderSide(width: 1, color: Color(0xFFDFE1E7)),
                   borderRadius: BorderRadius.circular(48),
                 ),
               ),

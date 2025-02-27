@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zatayo/app_router.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
 
 import '../../../constant/app_color.dart';
+import '../../../cubit/customer_details/customer_details_cubit.dart';
+import '../../../cubit/customer_details/customer_details_state.dart';
 import '../../common_widget/common_container_widget.dart';
 import '../widget/profile_form.dart';
+import '../widget/user_profile_widget.dart';
+
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
 
@@ -16,10 +21,11 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: const CommonTextWidget(text: "Edit Profile",
-        fontSize: 18,
+        title: const CommonTextWidget(
+          text: "Edit Profile",
+          fontSize: 18,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -46,18 +52,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       SizedBox(
                         height: 56,
                       ),
-                      ContainerWidget(
-                        borderRadius: 100,
-                        height: 98,
-                        width: 98,
-                      ),
+                      UserProfileWidget(),
                       SizedBox(
                         height: 31,
                       ),
-                      CommonTextWidget(
-                        text: "Abhijeet Miashra",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 21,
+                      BlocBuilder<CustomerDetailsCubit, CustomerDetailsState>(
+                        builder: (BuildContext context, state) {
+                          if (state is GetCustomerDetailSuccess) {
+                            return CommonTextWidget(
+                              text:
+                                  '${state.customerDetailsResponseModel.data?.first.name}',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 21,
+                            );
+                          }
+                          return SizedBox();
+                        },
                       ),
                       SizedBox(
                         height: 4,
