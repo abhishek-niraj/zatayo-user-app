@@ -12,7 +12,9 @@ import 'bloc/otp_bloc/otp_bloc.dart';
 import 'bloc/user_profile/user_profile_bloc.dart';
 import 'cubit/center/get_center_cubit.dart';
 import 'cubit/center/select_center_cubit.dart';
+import 'cubit/customer_details/customer_basic_information_cubit.dart';
 import 'cubit/customer_details/customer_details_cubit.dart';
+import 'cubit/customer_details/customer_sport_visited_api_cubit.dart';
 import 'cubit/customer_details/update_user_profle_cubit.dart';
 import 'cubit/customer_details/user_selected_location_information_cubit.dart';
 import 'cubit/deal_of_day/get_deal_of_day_cubit.dart';
@@ -101,8 +103,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ScanBarCodeCubit(apiClient)),
         BlocProvider(
             create: (context) => UserSelectedLocationInformationCubit()),
-        BlocProvider(
-            create: (context) => UpdateUserProfileCubit()),
+        BlocProvider(create: (context) => UpdateUserProfileCubit()),
+        BlocProvider(create: (context) => CustomerSportVisitedBloc(apiClient)),
+        BlocProvider(create: (context) => CustomerBasicInformationCubit()),
       ],
       child: MaterialApp.router(
         title: 'Zatatyo',

@@ -118,7 +118,9 @@ class ApiClient {
       if (kDebugMode) {
         print(response);
       }
-      print("Response");
+      if (kDebugMode) {
+        print("Response");
+      }
       return response;
     } catch (error) {
       // Handle errors

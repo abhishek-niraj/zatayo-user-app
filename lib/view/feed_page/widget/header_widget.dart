@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:zatayo/cubit/customer_details/customer_basic_information_cubit.dart';
 import 'package:zatayo/cubit/customer_details/customer_details_cubit.dart';
 import 'package:zatayo/cubit/customer_details/customer_details_state.dart';
+import 'package:zatayo/model/customer/customer_basic_information_model.dart';
 
 import '../../notification/screen/notification_screen.dart';
 import '../../pick_an_area/screen/pick_an_area_screen.dart';
@@ -36,6 +38,13 @@ class HeaderWidget extends StatelessWidget {
               BlocBuilder<CustomerDetailsCubit, CustomerDetailsState>(
                 builder: (BuildContext context, state) {
                   if (state is GetCustomerDetailSuccess) {
+                    context.read<CustomerBasicInformationCubit>().updateModel(
+                        customerId: state.customerDetailsResponseModel.data
+                                ?.first.customerId ??
+                            '',
+                        customerName: state.customerDetailsResponseModel.data
+                                ?.first.name ??
+                            '');
                     return Text(
                       'Hi, ${state.customerDetailsResponseModel.data?.first.name} !',
                       textAlign: TextAlign.center,

@@ -220,14 +220,16 @@ class _ProfileFormState extends State<ProfileForm> {
                         "dob": updateUserProfileCubit.state.dob,
                         "gender": updateUserProfileCubit.state.gender,
                         "height": updateUserProfileCubit.state.height,
-                        "weight": updateUserProfileCubit.state.weight
+                        "weight": updateUserProfileCubit.state.weight,
+                        "image": updateUserProfileCubit.state.userProfileImage
                       };
-                      print(updateUserProfileCubit.state.toJson());
+                   print(updateUserProfileCubit.state.toJson());
                       if (userProfileState is! UpdateUserProfileLoading) {
                         context.read<UserProfileBloc>().add(UpdateUserProfile(
-                              bodyRequest: bodyRequest,
-                          image: updateUserProfileCubit.state.userProfileImage
-                            ));
+                            bodyRequest: bodyRequest,
+                            image: updateUserProfileCubit.state.userProfileImage
+                        ));
+
                       }
                     },
                   );

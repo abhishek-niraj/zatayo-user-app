@@ -3,8 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../ApiClient/api_client.dart';
+import '../../../cubit/customer_details/customer_details_cubit.dart';
+import '../../../cubit/customer_details/customer_details_state.dart';
 import '../../../cubit/customer_details/update_user_profle_cubit.dart';
 import '../../common_widget/common_container_widget.dart';
+
 class UserProfileWidget extends StatefulWidget {
   const UserProfileWidget({super.key});
 
@@ -29,28 +33,24 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
     return null;
   }
 
-  void setImage(image){
-    context
-        .read<UpdateUserProfileCubit>().updateModel(
-        userProfileImage:  image
-    );
+  void setImage(image) {
+    context.read<UpdateUserProfileCubit>().updateModel(userProfileImage: image);
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding:
-      const EdgeInsets.symmetric(horizontal: 5),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       child: InkWell(
         onTap: () async {
-          final Uint8List? image =
-              await getImageFromGallery();
+          final Uint8List? image = await getImageFromGallery();
 
           if (image != null) {
             registrationImage = image;
             setImage(image);
             setState(() {});
           }
-      },
+        },
         child: ContainerWidget(
           borderRadius: 100,
           height: 98,
@@ -63,17 +63,27 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                 borderRadius: BorderRadius.circular(56),
                 child: registrationImage != null
                     ? Image.memory(
-                  registrationImage!,
-                  fit: BoxFit.cover, // Change this to cover
-                  width: 98, // Ensure it takes full width
-                  height: 98, // Ensure it takes full height
-                )
-                    : Image.asset(
-                  "assets/images/profile.png",
-                  fit: BoxFit.cover, // Ensure placeholder fills too
-                  width: 98,
-                  height: 98,
-                ),
+                        registrationImage!,
+                        fit: BoxFit.cover, // Change this to cover
+                        width: 98, // Ensure it takes full width
+                        height: 98, // Ensure it takes full height
+                      )
+                    : BlocBuilder<CustomerDetailsCubit, CustomerDetailsState>(
+                        builder: (BuildContext context, state) {
+                          if (state is GetCustomerDetailSuccess) {
+                            return state.customerDetailsResponseModel.data!
+                                    .first.profileImage!.isNotEmpty
+                                ? Image.network(
+                                    "$baseUrl/${state.customerDetailsResponseModel.data!.first.profileImage ?? ''}",
+                                    fit: BoxFit.cover,
+                                    width: 98, // Ensure it takes full width
+                                    height: 98,
+                                  )
+                                : Image.asset("assets/images/profile.png");
+                          }
+                          return SizedBox();
+                        },
+                      ),
               ),
               Positioned(
                 bottom: 0,
@@ -82,8 +92,7 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
               )
             ],
           ),
-        )
-        ,
+        ),
       ),
     );
   }

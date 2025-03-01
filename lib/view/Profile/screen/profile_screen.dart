@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zatayo/constant/app_color.dart';
+import 'package:zatayo/cubit/customer_details/customer_sport_visited_api_cubit.dart';
+import 'package:zatayo/cubit/customer_details/customer_sport_visited_api_state.dart';
+import 'package:zatayo/utils/get_current_month_dates.dart';
 import 'package:zatayo/view/common_widget/common_container_widget.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
 
 import '../../../ApiClient/api_client.dart';
+import '../../../cubit/customer_details/customer_basic_information_cubit.dart';
 import '../../../cubit/customer_details/customer_details_cubit.dart';
 import '../../../cubit/customer_details/customer_details_state.dart';
 import '../widget/circular_progress_widget.dart';
@@ -19,6 +23,22 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+     final getCurrentMonthDate = getCurrentMonthDates();
+     final customerBasicInformation = context.read<CustomerBasicInformationCubit>().state;
+    final bodyRequest = {
+      "startDate": getCurrentMonthDate["startDate"],
+      "endDate": getCurrentMonthDate["endDate"],
+      "customerId": customerBasicInformation.customerId
+    };
+    context
+        .read<CustomerSportVisitedBloc>()
+        .fetchCustomerSportVisited(bodyRequest);
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         height: 98,
                                         width: 98,
                                         backgroundColor: Colors.transparent,
+                                        borderColor: Colors.transparent,
                                         borderWidth: 0,
                                         child: ClipRRect(
                                             borderRadius:
@@ -91,6 +112,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     .isNotEmpty
                                                 ? Image.network(
                                                     "$baseUrl/${state.customerDetailsResponseModel.data!.first.profileImage ?? ''}",
+                                                    fit: BoxFit.cover,
                                                   )
                                                 : Image.asset(
                                                     "assets/images/profile.png"))),
@@ -100,7 +122,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        CommonTextWidget(text: "23"),
+                                        BlocBuilder<CustomerSportVisitedBloc,
+                                            GetCustomerSportVisitedState>(
+                                          builder:
+                                              (BuildContext context, state) {
+                                            if (state
+                                                is GetCustomerSportVisitedStateSuccess) {
+                                              return CommonTextWidget(
+                                                  text: state
+                                                      .resourceDataResponseModel
+                                                      .data!
+                                                      .first
+                                                      .resourceData
+                                                      .toString());
+                                            }
+                                            return CommonTextWidget(text: "0");
+                                          },
+                                        ),
                                         CommonTextWidget(
                                           text: 'Sports visited',
                                           textAlign: TextAlign.center,
