@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:zatayo/constant/app_color.dart';
 import 'package:zatayo/cubit/customer_details/customer_sport_visited_api_cubit.dart';
 import 'package:zatayo/cubit/customer_details/customer_sport_visited_api_state.dart';
+import 'package:zatayo/cubit/customer_details/get_my_plan_information_cubit.dart';
 import 'package:zatayo/utils/get_current_month_dates.dart';
 import 'package:zatayo/view/common_widget/common_container_widget.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
@@ -13,6 +14,7 @@ import '../../../ApiClient/api_client.dart';
 import '../../../cubit/customer_details/customer_basic_information_cubit.dart';
 import '../../../cubit/customer_details/customer_details_cubit.dart';
 import '../../../cubit/customer_details/customer_details_state.dart';
+import '../../common_widget/linear_progress_bar_widegt.dart';
 import '../widget/circular_progress_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -25,8 +27,9 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
-     final getCurrentMonthDate = getCurrentMonthDates();
-     final customerBasicInformation = context.read<CustomerBasicInformationCubit>().state;
+    final getCurrentMonthDate = getCurrentMonthDates();
+    final customerBasicInformation =
+        context.read<CustomerBasicInformationCubit>().state;
     final bodyRequest = {
       "startDate": getCurrentMonthDate["startDate"],
       "endDate": getCurrentMonthDate["endDate"],
@@ -35,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     context
         .read<CustomerSportVisitedBloc>()
         .fetchCustomerSportVisited(bodyRequest);
+    context.read<GetMyPlanInformationCubit>().fetchMyPlan();
     // TODO: implement initState
     super.initState();
   }
@@ -210,102 +214,257 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(
                           height: 50,
                         ),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.topRight,
-                              colors: [
-                                Color(0xFFFDEA88),
-                                Color(0xFFFFCB32),
-                              ],
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 20,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 15),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: CommonTextWidget(
-                                                text: "Membership",
-                                                color: Color(0xFF444444),
-                                                fontWeight: FontWeight.w600,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: CommonTextWidget(
-                                                text: "Gold Subscription",
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 17,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: CommonTextWidget(
-                                                text: "Diamond Sport's visited",
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: CommonTextWidget(
-                                                text:
-                                                    "Enjoy unlimited visits to Sliver Sport",
-                                                color: Colors.black,
-                                                overflow: TextOverflow.visible,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: CircularBorderWidget(
-                                    progress: 0.5,
-                                    completedText: "3/5",
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        Builder(
+                          builder: (context) {
+                            final myPlanCubit = context.watch<GetMyPlanInformationCubit>().getMyPlanInformationResponseModel;
+                             if(myPlanCubit.data != null && myPlanCubit.data!.isNotEmpty){
+                               return ListView.builder(
+                                   shrinkWrap: true,
+                                   itemCount: myPlanCubit.data?.length ?? 0,
+                                   physics: NeverScrollableScrollPhysics(),
+                                   itemBuilder: (BuildContext context, index) {
+                                     final myPlanData = myPlanCubit.data?[index];
+                                     return Padding(
+                                       padding: const EdgeInsets.only(bottom: 10),
+                                       child: Container(
+                                         width: double.infinity,
+                                         decoration: BoxDecoration(
+                                           borderRadius: BorderRadius.circular(10),
+                                           gradient: LinearGradient(
+                                             begin: Alignment.topLeft,
+                                             end: Alignment.topRight,
+                                             colors: [
+                                               Color(0xFFFDEA88),
+                                               Color(0xFFFFCB32),
+                                             ],
+                                           ),
+                                         ),
+                                         child: Padding(
+                                           padding: const EdgeInsets.symmetric(
+                                             vertical: 20,
+                                           ),
+                                           child: Row(
+                                             mainAxisAlignment:
+                                             MainAxisAlignment.spaceBetween,
+                                             children: [
+                                               Expanded(
+                                                 child: Padding(
+                                                   padding: const EdgeInsets.only(left: 15),
+                                                   child: Column(
+                                                     mainAxisAlignment:
+                                                     MainAxisAlignment.start,
+                                                     crossAxisAlignment:
+                                                     CrossAxisAlignment.start,
+                                                     children: [
+                                                       Row(
+                                                         children: [
+                                                           Expanded(
+                                                             child: CommonTextWidget(
+                                                               text: "Membership",
+                                                               color: Color(0xFF444444),
+                                                               fontWeight: FontWeight.w600,
+                                                               overflow:
+                                                               TextOverflow.ellipsis,
+                                                             ),
+                                                           ),
+                                                           if(myPlanData?.subscriptionStatus == "Active")
+                                                           Padding(
+                                                             padding: const EdgeInsets.only(right: 10),
+                                                             child: CommonTextWidget(
+                                                               text: "Expires in : ${myPlanData?.totalRemainingDays ?? ''}",
+                                                               color: Color(0xFF444444),
+                                                               fontWeight: FontWeight.w600,
+                                                               overflow:
+                                                               TextOverflow.ellipsis,
+                                                             ),
+                                                           )
+                                                         ],
+                                                       ),
+                                                       Row(
+                                                         children: [
+                                                           Expanded(
+                                                             child: CommonTextWidget(
+                                                               text: myPlanData?.planName ?? '',
+                                                               fontSize: 18,
+                                                               fontWeight: FontWeight.w700,
+                                                               color: Colors.black,
+                                                               overflow:
+                                                               TextOverflow.ellipsis,
+                                                             ),
+                                                           ),
+                                                           Padding(
+                                                             padding: const EdgeInsets.only(right: 10),
+                                                             child: CommonTextWidget(
+                                                               text: myPlanData?.subscriptionStatus ?? '',
+                                                               fontSize: 18,
+                                                               fontWeight: FontWeight.w700,
+                                                               color: Colors.black,
+                                                               overflow:
+                                                               TextOverflow.ellipsis,
+                                                             ),
+                                                           ),
+                                                         ],
+                                                       ),
+                                                       SizedBox(
+                                                         height: 17,
+                                                       ),
+                                                       Padding(
+                                                         padding: const EdgeInsets.only(right: 10),
+                                                         child: Row(
+                                                           children: [
+                                                             Expanded(
+                                                               child: CommonTextWidget(
+                                                                 text:
+                                                                 "Diamond Sport's visited ",
+                                                                 fontWeight: FontWeight.w700,
+                                                                 color: Colors.black,
+                                                                 overflow:
+                                                                 TextOverflow.ellipsis,
+                                                               ),
+                                                             ),
+                                                             if(myPlanData?.diamondDays == "Unlimited")
+                                                               CommonTextWidget(
+                                                                 text:
+                                                                 "Unlimited",
+                                                                 fontWeight: FontWeight.w700,
+                                                                 color: Colors.black,
+                                                                 overflow:
+                                                                 TextOverflow.ellipsis,
+                                                               )else
+                                                             CommonTextWidget(
+                                                               text:
+                                                               "${myPlanData?.remainingDiamondDays}/${myPlanData?.diamondDays}",
+                                                               fontWeight: FontWeight.w700,
+                                                               color: Colors.black,
+                                                               overflow:
+                                                               TextOverflow.ellipsis,
+                                                             ),
+                                                           ],
+                                                         ),
+                                                       ),
+                                                       if(myPlanData?.diamondDays != "Unlimited" || myPlanData?.remainingDiamondDays != "Unlimited")
+                                                       Padding(
+                                                         padding: EdgeInsets.only(right: 10),
+                                                         child: LinearProgressBarWidget(
+                                                           progress: (double.parse(myPlanData?.remainingDiamondDays ?? "0.0") /
+                                                               double.parse(myPlanData?.diamondDays ?? "0.0")).clamp(0.0, 1.0),
+                                                           completedText: "",
+                                                         ),
+                                                       )
+                                                       else
+                                                         Padding(
+                                                           padding: EdgeInsets.only(right: 10),
+                                                           child: LinearProgressBarWidget(
+                                                             progress: 1,
+                                                             completedText: "",
+                                                           ),
+                                                         ),
+
+                                                       Padding(
+                                                         padding: const EdgeInsets.only(right: 10),
+                                                         child: Row(
+                                                           children: [
+                                                             Expanded(
+                                                               child: CommonTextWidget(
+                                                                 text:
+                                                                 "Gold Sport's visited",
+                                                                 fontWeight: FontWeight.w700,
+                                                                 color: Colors.black,
+                                                                 overflow:
+                                                                 TextOverflow.ellipsis,
+                                                               ),
+                                                             ),
+                                                             if(myPlanData?.goldDays == "Unlimited")
+                                                               CommonTextWidget(
+                                                                 text:
+                                                                 "Unlimited",
+                                                                 fontWeight: FontWeight.w700,
+                                                                 color: Colors.black,
+                                                                 overflow:
+                                                                 TextOverflow.ellipsis,
+                                                               )else
+                                                               CommonTextWidget(
+                                                                 text:
+                                                                 "${myPlanData?.remainingGoldDays}/${myPlanData?.goldDays}",
+                                                                 fontWeight: FontWeight.w700,
+                                                                 color: Colors.black,
+                                                                 overflow:
+                                                                 TextOverflow.ellipsis,
+                                                               ),
+                                                           ],
+                                                         ),
+                                                       ),
+                                                       if(myPlanData?.goldDays == "Unlimited")
+                                                       Padding(
+                                                         padding: const EdgeInsets.only(right: 10),
+                                                         child: LinearProgressBarWidget(
+                                                           progress: 1,
+                                                           completedText: "",
+                                                         ),
+                                                       ),
+                                                       Padding(
+                                                         padding: const EdgeInsets.only(right: 10),
+                                                         child: Row(
+                                                           children: [
+                                                             Expanded(
+                                                               child: CommonTextWidget(
+                                                                 text:
+                                                                 "Sliver Sport's visited",
+                                                                 fontWeight: FontWeight.w700,
+                                                                 color: Colors.black,
+                                                                 overflow:
+                                                                 TextOverflow.ellipsis,
+                                                               ),
+                                                             ),
+                                                             if(myPlanData?.sliverDays == "Unlimited")
+                                                               CommonTextWidget(
+                                                                 text:
+                                                                 "Unlimited",
+                                                                 fontWeight: FontWeight.w700,
+                                                                 color: Colors.black,
+                                                                 overflow:
+                                                                 TextOverflow.ellipsis,
+                                                               )else
+                                                               CommonTextWidget(
+                                                                 text:
+                                                                 "${myPlanData?.sliverDays}/${myPlanData?.sliverDays}",
+                                                                 fontWeight: FontWeight.w700,
+                                                                 color: Colors.black,
+                                                                 overflow:
+                                                                 TextOverflow.ellipsis,
+                                                               ),
+                                                           ],
+                                                         ),
+                                                       ),
+                                                       if(myPlanData?.sliverDays == "Unlimited")
+                                                       Padding(
+                                                         padding: const EdgeInsets.only(right: 10),
+                                                         child: LinearProgressBarWidget(
+                                                           progress: 1,
+                                                           completedText: "",
+                                                         ),
+                                                       ),
+                                                     ],
+                                                   ),
+                                                 ),
+                                               ),
+                                               // Padding(
+                                               //   padding: const EdgeInsets.only(right: 10),
+                                               //   child: CircularBorderWidget(
+                                               //     progress: 0.5,
+                                               //     completedText: "3/5",
+                                               //   ),
+                                               // ),
+                                             ],
+                                           ),
+                                         ),
+                                       ),
+                                     );
+                                   });
+                             }
+                            return SizedBox();
+                          }
+                        )
                       ],
                     ),
                   ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart'; // Import Flutter Bloc package
 import 'package:zatayo/ApiClient/api_client.dart';
 import 'package:zatayo/app_router.dart';
 import 'package:zatayo/constant/app_theme.dart';
+import 'package:zatayo/cubit/customer_details/get_my_plan_information_cubit.dart';
 import 'package:zatayo/cubit/fitness_banner/fitness_banner_cubit.dart';
 import 'package:zatayo/cubit/scann_bar_code/scan_bar_code_cubit.dart';
 import 'package:zatayo/cubit/subscription_benefits/subscription_benefits_cubit.dart';
@@ -106,6 +107,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UpdateUserProfileCubit()),
         BlocProvider(create: (context) => CustomerSportVisitedBloc(apiClient)),
         BlocProvider(create: (context) => CustomerBasicInformationCubit()),
+        BlocProvider(create: (context) => GetMyPlanInformationCubit(apiClient)),
+
       ],
       child: MaterialApp.router(
         title: 'Zatatyo',
