@@ -7,10 +7,9 @@ part of 'common_response_model.dart';
 // **************************************************************************
 
 CommonResponseModel _$CommonResponseModelFromJson(Map<String, dynamic> json) =>
-    CommonResponseModel(
-      statusCode: (json['statusCode'] as num?)?.toInt(),
-      message: json['message'] as String?,
-    );
+    CommonResponseModel()
+      ..statusCode = (json['statusCode'] as num?)?.toInt()
+      ..message = json['message'] as String?;
 
 Map<String, dynamic> _$CommonResponseModelToJson(
         CommonResponseModel instance) =>

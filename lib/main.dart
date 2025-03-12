@@ -25,6 +25,7 @@ import 'cubit/sport/get_sport_by_id_cubit.dart';
 import 'cubit/sport/get_sport_cubit.dart';
 import 'cubit/sport/get_top_sport_cubit.dart';
 import 'cubit/subscription_plan/buy_subscription_plan_cubit.dart';
+import 'cubit/subscription_plan/subscription_plan_activation_cubit.dart';
 import 'cubit/subscription_plan/subscription_plan_cubit.dart';
 
 void main() {
@@ -108,6 +109,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CustomerSportVisitedBloc(apiClient)),
         BlocProvider(create: (context) => CustomerBasicInformationCubit()),
         BlocProvider(create: (context) => GetMyPlanInformationCubit(apiClient)),
+        BlocProvider(create: (context) => SubscriptionPlanActivationCubit(apiClient)),
 
       ],
       child: MaterialApp.router(

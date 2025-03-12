@@ -7,6 +7,7 @@ import 'package:zatayo/cubit/customer_details/customer_sport_visited_api_cubit.d
 import 'package:zatayo/cubit/customer_details/customer_sport_visited_api_state.dart';
 import 'package:zatayo/cubit/customer_details/get_my_plan_information_cubit.dart';
 import 'package:zatayo/utils/get_current_month_dates.dart';
+import 'package:zatayo/view/Profile/widget/service_activate_widget.dart';
 import 'package:zatayo/view/common_widget/common_container_widget.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
 
@@ -267,6 +268,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                TextOverflow.ellipsis,
                                                              ),
                                                            ),
+                                                           if(myPlanData?.subscriptionStatus == "Pause")
+                                                             ServiceActivateWidget(
+                                                               id: myPlanData?.id ?? 0,
+                                                             ),
                                                            if(myPlanData?.subscriptionStatus == "Active")
                                                            Padding(
                                                              padding: const EdgeInsets.only(right: 10),
