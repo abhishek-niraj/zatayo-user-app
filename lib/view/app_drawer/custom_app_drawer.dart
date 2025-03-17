@@ -1,0 +1,94 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:zatayo/constant/app_color.dart';
+import 'package:zatayo/view/common_widget/common_text_widget.dart';
+
+import '../Profile/screen/profile_screen.dart';
+
+class CustomAppDrawer extends StatefulWidget {
+  const CustomAppDrawer({super.key});
+
+  @override
+  State<CustomAppDrawer> createState() => _CustomAppDrawerState();
+}
+
+class _CustomAppDrawerState extends State<CustomAppDrawer> {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(0), bottomRight: Radius.circular(0)),
+      ),
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment(0.00, -1.00),
+            end: Alignment(0, 1),
+            colors: [
+              Color(0xFF381004),
+              Color(0xFFB7340B),
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.person,
+
+                  ),
+                  title: const Text('Profile',
+
+                    style: TextStyle(
+
+                    ),),
+                  onTap: () {
+                    context.push(ProfileScreen.routeName);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.event_note_sharp,
+
+                  ),
+                  title: const Text('Privacy Policy',
+
+                    style: TextStyle(
+
+                    ),),
+                  onTap: () {
+                    // Navigator.pop(context);
+                    // Navigator.pushNamed(context, TermConditionScreen.routeName);
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(
+                    Icons.event_note_sharp,
+
+                  ),
+                  title: const Text('Terms & Conditions',
+
+                    style: TextStyle(
+
+                    ),),
+                  onTap: () {
+                    // Navigator.pop(context);
+                    // Navigator.pushNamed(context, TermConditionScreen.routeName);
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

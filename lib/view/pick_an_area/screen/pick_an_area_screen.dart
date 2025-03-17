@@ -73,15 +73,6 @@ class _PickAnAreaScreenState extends State<PickAnAreaScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InkWell(
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Icon(Icons.arrow_back_ios),
-                      ),
-                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,9 +189,11 @@ class _PickAnAreaScreenState extends State<PickAnAreaScreen> {
                                   context.read<UserSelectedLocationInformationCubit>().updateModel(
                                     cityName: centers[index].city ?? ''
                                   );
-                                  context.push(
-                                    '/feed-page',
-                                  );
+                                  // context.push(
+                                  //   '/feed-page',
+                                  // );
+                                  context.pushReplacement('/feed-page');
+
                                   // Navigator.pop(context);
                                 },
                               ),

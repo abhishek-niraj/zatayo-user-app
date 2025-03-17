@@ -5,6 +5,7 @@ import 'package:zatayo/cubit/customer_details/customer_basic_information_cubit.d
 import 'package:zatayo/cubit/customer_details/customer_details_cubit.dart';
 import 'package:zatayo/cubit/customer_details/customer_details_state.dart';
 import 'package:zatayo/model/customer/customer_basic_information_model.dart';
+import 'package:zatayo/view/Profile/screen/profile_screen.dart';
 
 import '../../notification/screen/notification_screen.dart';
 import '../../pick_an_area/screen/pick_an_area_screen.dart';
@@ -64,7 +65,9 @@ class HeaderWidget extends StatelessWidget {
           InkWell(
             onTap: () {
               // context.push(NotificationScreen.routeName);
-              context.push(PickAnAreaScreen.routeName);
+              // context.push(PickAnAreaScreen.routeName);
+              Scaffold.of(context).openDrawer();
+              // context.push(ProfileScreen.routeName);
             },
             child: Container(
               width: 48,
@@ -84,23 +87,23 @@ class HeaderWidget extends StatelessWidget {
                     top: 0,
                     bottom: 0,
                     child: Icon(
-                      Icons.search,
+                      Icons.person,
                       size: 27,
                       color: Color(0xFFF5F5F5),
                     ),
                   ),
-                  Positioned(
-                    left: 25,
-                    top: 15,
-                    child: Container(
-                      width: 6,
-                      height: 6,
-                      decoration: const ShapeDecoration(
-                        color: Color(0xFFDF1C41),
-                        shape: OvalBorder(),
-                      ),
-                    ),
-                  )
+                  // Positioned(
+                  //   left: 25,
+                  //   top: 15,
+                  //   child: Container(
+                  //     width: 6,
+                  //     height: 6,
+                  //     decoration: const ShapeDecoration(
+                  //       color: Color(0xFFDF1C41),
+                  //       shape: OvalBorder(),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ),

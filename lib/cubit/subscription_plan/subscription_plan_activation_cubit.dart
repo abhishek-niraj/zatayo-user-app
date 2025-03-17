@@ -23,6 +23,7 @@ class SubscriptionPlanActivationCubit
       if (response.statusCode == 200) {
         commonResponseModel = CommonResponseModel.fromJson(response.data);
         if (commonResponseModel.statusCode == 200) {
+          print("000000000000000");
           emit(SuccessActivationPlan(commonResponseModel: commonResponseModel));
         } else {
           emit(FailActivationPlan(commonResponseModel: commonResponseModel));

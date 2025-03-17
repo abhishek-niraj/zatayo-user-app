@@ -23,9 +23,7 @@ class _SportsBannerWidgetState extends State<SportsBannerWidget> {
   StreamSubscription? _subscription;
 
   void apiCall(id, index) {
-    Future.microtask(() {
-      selectedSport(id, index);
-    });
+    selectedSport(id, index);
   }
 
   void selectedSport(id, index) {
