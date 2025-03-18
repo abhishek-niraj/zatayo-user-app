@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:zatayo/constant/app_color.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
 
@@ -14,6 +15,12 @@ class CustomAppDrawer extends StatefulWidget {
 }
 
 class _CustomAppDrawerState extends State<CustomAppDrawer> {
+  Future<void> _launchUrl(url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -43,13 +50,11 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                 ListTile(
                   leading: const Icon(
                     Icons.person,
-
                   ),
-                  title: const Text('Profile',
-
-                    style: TextStyle(
-
-                    ),),
+                  title: const Text(
+                    'Profile',
+                    style: TextStyle(),
+                  ),
                   onTap: () {
                     context.push(ProfileScreen.routeName);
                   },
@@ -57,31 +62,34 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                 ListTile(
                   leading: const Icon(
                     Icons.event_note_sharp,
-
                   ),
-                  title: const Text('Privacy Policy',
-
-                    style: TextStyle(
-
-                    ),),
+                  title: const Text(
+                    'Privacy Policy',
+                    style: TextStyle(),
+                  ),
                   onTap: () {
                     // Navigator.pop(context);
                     // Navigator.pushNamed(context, TermConditionScreen.routeName);
+
+                    final Uri _url = Uri.parse(
+                        'https://dashboard.zatayo.com/privacy-policy');
+                    launchUrl(_url);
                   },
                 ),
                 ListTile(
                   leading: const Icon(
                     Icons.event_note_sharp,
-
                   ),
-                  title: const Text('Terms & Conditions',
-
-                    style: TextStyle(
-
-                    ),),
+                  title: const Text(
+                    'Terms & Conditions',
+                    style: TextStyle(),
+                  ),
                   onTap: () {
                     // Navigator.pop(context);
                     // Navigator.pushNamed(context, TermConditionScreen.routeName);
+                    final Uri url = Uri.parse(
+                        'https://dashboard.zatayo.com/terms-and-conditions');
+                    launchUrl(url);
                   },
                 ),
               ],

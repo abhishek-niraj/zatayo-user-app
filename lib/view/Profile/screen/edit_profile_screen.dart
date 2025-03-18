@@ -74,7 +74,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          context.push("/my-friends-screen");
+                          // context.push("/my-friends-screen");
                         },
                         child: CommonTextWidget(
                           text: "Edit Profile",

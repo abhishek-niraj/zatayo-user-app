@@ -60,10 +60,10 @@ class AppRouter {
           path: "/edit-profile",
           name: "editProfile",
           builder: (context, state) => const EditProfileScreen()),
-      GoRoute(
-          path: "/my-friends-screen",
-          name: "myFriends",
-          builder: (context, state) => const MyFriendScreen()),
+      // GoRoute(
+      //     path: "/my-friends-screen",
+      //     name: "myFriends",
+      //     builder: (context, state) => const MyFriendScreen()),
       GoRoute(
           path: "/near-by-gyms",
           name: "nearByGyms",
