@@ -47,109 +47,109 @@ class _PickAnAreaScreenState extends State<PickAnAreaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          // Make the gradient background cover the entire page
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomLeft,
-              colors: [
-                Color(0xFF381004),
-                Color(0xFFB7340B),
-                Color(0xFF381004),
-              ],
-            ),
+      body: Container(
+        // Make the gradient background cover the entire page
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color(0xFF381004),
+              Color(0xFFB7340B),
+              Color(0xFF381004),
+            ],
           ),
-          // Use MediaQuery to ensure the container takes up the full height of the screen
-          child: Padding(
-            padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CommonTextWidget(
-                          text: "Pick an area",
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
+        ),
+        // Use MediaQuery to ensure the container takes up the full height of the screen
+        child: Padding(
+          padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonTextWidget(
+                        text: "Pick an area",
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      CommonTextWidget(
+                        text: "To find classes",
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 50,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        CommonTextWidget(
-                          text: "To find classes",
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 50,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          shadows: [
-                            BoxShadow(
-                              color: Color(0x3FF97316).withOpacity(0.09),
-                              blurRadius: 0,
-                              offset: Offset(0, 0),
-                              spreadRadius: 4,
-                            )
-                          ],
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: CommonTextFieldWidget(
-                              hintText: "Search an area",
-                              prefixIcon: const Padding(
-                                padding: EdgeInsets.only(right: 10),
-                                child: Icon(
-                                  Icons.search,
-                                  size: 25,
-                                ),
+                        shadows: [
+                          BoxShadow(
+                            color: Color(0x3FF97316).withOpacity(0.09),
+                            blurRadius: 0,
+                            offset: Offset(0, 0),
+                            spreadRadius: 4,
+                          )
+                        ],
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: CommonTextFieldWidget(
+                            hintText: "Search an area",
+                            prefixIcon: const Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: Icon(
+                                Icons.search,
+                                size: 25,
                               ),
-                              maxLength: 30,
-                              keyboardType: TextInputType.text,
-                              inputFormatters: const [],
                             ),
+                            maxLength: 30,
+                            keyboardType: TextInputType.text,
+                            inputFormatters: const [],
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Row(
-                  children: [
-                    CommonTextWidget(
-                      text: "AREA",
-                      fontWeight: FontWeight.w600,
-                    ),
-                    SizedBox(width: 10),
-                    CommonTextWidget(
-                      text: "(No. of sports centers)",
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white70,
-                    )
-                  ],
-                ),
-                SizedBox(height: 20),
-                Builder(builder: (context) {
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  CommonTextWidget(
+                    text: "AREA",
+                    fontWeight: FontWeight.w600,
+                  ),
+                  SizedBox(width: 10),
+                  CommonTextWidget(
+                    text: "(No. of sports centers)",
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white70,
+                  )
+                ],
+              ),
+              SizedBox(height: 20),
+              Expanded(
+                child: Builder(builder: (context) {
                   final centers =
                       context.watch<GetCenterCubit>().getCenterResponseModel.data;
 
@@ -174,7 +174,7 @@ class _PickAnAreaScreenState extends State<PickAnAreaScreen> {
                                 ),
                                 title: CommonTextWidget(
                                     text:
-                                        "${centers[index].city}   (${centers[index].centersNumber})"),
+                                    "${centers[index].city}   (${centers[index].centersNumber})"),
                                 onTap: () {
                                   final selectedCenter = context.read<SelectCenterCubit>();
                                   selectedCenter.selectCenter(
@@ -187,7 +187,7 @@ class _PickAnAreaScreenState extends State<PickAnAreaScreen> {
                                     callAPi(selectedCenter.state.sportId ?? '', centers[index].city ?? '');
                                   }
                                   context.read<UserSelectedLocationInformationCubit>().updateModel(
-                                    cityName: centers[index].city ?? ''
+                                      cityName: centers[index].city ?? ''
                                   );
                                   // context.push(
                                   //   '/feed-page',
@@ -211,9 +211,9 @@ class _PickAnAreaScreenState extends State<PickAnAreaScreen> {
                     );
                   }
                   return SizedBox();
-                })
-              ],
-            ),
+                }),
+              )
+            ],
           ),
         ),
       ),

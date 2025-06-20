@@ -6,7 +6,9 @@ import 'package:zatayo/cubit/customer_details/customer_details_cubit.dart';
 import 'package:zatayo/cubit/customer_details/customer_details_state.dart';
 import 'package:zatayo/model/customer/customer_basic_information_model.dart';
 import 'package:zatayo/view/Profile/screen/profile_screen.dart';
+import 'package:zatayo/view/common_widget/common_snack_bar_widget.dart';
 
+import '../../common_widget/user_profile_set_string.dart';
 import '../../notification/screen/notification_screen.dart';
 import '../../pick_an_area/screen/pick_an_area_screen.dart';
 
@@ -66,7 +68,13 @@ class HeaderWidget extends StatelessWidget {
             onTap: () {
               // context.push(NotificationScreen.routeName);
               // context.push(PickAnAreaScreen.routeName);
-              Scaffold.of(context).openDrawer();
+              if(UserProfileSetString.instance.isUserSkip == "yes"){
+                showSSnackBar(context, "Please Login", Colors.green);
+                context.pop();
+              }else{
+                Scaffold.of(context).openDrawer();
+              }
+
               // context.push(ProfileScreen.routeName);
             },
             child: Container(

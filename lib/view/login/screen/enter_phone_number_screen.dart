@@ -4,14 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zatayo/constant/app_color.dart';
+import 'package:zatayo/cubit/skip/user_skip_cubit.dart';
+import 'package:zatayo/cubit/skip/user_skip_state.dart';
 
 import '../../../bloc/otp_bloc/otp_bloc.dart';
+import '../../../utils/app_shared_preference_helper.dart';
 import '../../common_widget/common_button_widget.dart';
+import '../../common_widget/common_loading_indicator.dart';
 import '../../common_widget/common_snack_bar_widget.dart';
 import '../../common_widget/common_text_field_widget.dart';
 import '../../common_widget/common_text_widget.dart';
+import '../../common_widget/user_profile_set_string.dart';
 
 class EnterPhoneNumberScreen extends StatelessWidget {
+  static const String routeName = "/";
   EnterPhoneNumberScreen({super.key});
 
   final TextEditingController _phoneNumberTextEditingController =
@@ -28,6 +34,45 @@ class EnterPhoneNumberScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10, top: 10),
+                    child: BlocConsumer<UserSkipCubit, UserSkipState>(
+                      listener: (BuildContext context, UserSkipState state) {
+                        if(state is UserSkipLoading){
+                          showCustomCupertinoDialog(context);
+                        }
+                        if (state is UserSkipSuccess) {
+                          context.pop();
+                          UserProfileSetString.instance.isUserSkip = "yes";
+                          AppSharedPreferenceHelper().saveCustomerData(
+                              "shutCustomerToken",
+                              state.otpVerifyResponseModel.token ?? '');
+                          context.push('/feed-page');
+                        }
+                      },
+                      builder: (BuildContext context, UserSkipState state) {
+                        return InkWell(
+                          onTap: () {
+                            context.read<UserSkipCubit>().skipLogin();
+                          },
+                          child: Text(
+                            'Skip',
+                            style: GoogleFonts.workSans(
+                              textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 18),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 200),
                 child: Row(
@@ -256,6 +301,7 @@ class EnterPhoneNumberScreen extends StatelessWidget {
                                         listener: (BuildContext context,
                                             OtpState state) {
                                           if (state is OtpSentSuccess) {
+                                            UserProfileSetString.instance.isUserSkip = "no";
                                             final argumentData = {
                                               'phoneNumber':
                                                   _phoneNumberTextEditingController

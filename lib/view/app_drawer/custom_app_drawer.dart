@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:zatayo/constant/app_color.dart';
+import 'package:zatayo/view/common_widget/common_snack_bar_widget.dart';
 import 'package:zatayo/view/common_widget/common_text_widget.dart';
 
 import '../Profile/screen/profile_screen.dart';
+import '../common_widget/cuportino_dialog.dart';
 
 class CustomAppDrawer extends StatefulWidget {
   const CustomAppDrawer({super.key});
@@ -44,52 +46,80 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
             padding: const EdgeInsets.only(top: 20),
             child: Column(
               children: [
-                SizedBox(
-                  height: 30,
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.person,
-                  ),
-                  title: const Text(
-                    'Profile',
-                    style: TextStyle(),
-                  ),
-                  onTap: () {
-                    context.push(ProfileScreen.routeName);
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.event_note_sharp,
-                  ),
-                  title: const Text(
-                    'Privacy Policy',
-                    style: TextStyle(),
-                  ),
-                  onTap: () {
-                    // Navigator.pop(context);
-                    // Navigator.pushNamed(context, TermConditionScreen.routeName);
+                Expanded(
+                    child: Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    ListTile(
+                      leading: const Icon(
+                        Icons.person,
+                      ),
+                      title: const Text(
+                        'Profile',
+                        style: TextStyle(),
+                      ),
+                      onTap: () {
+                        context.push(ProfileScreen.routeName);
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(
+                        Icons.event_note_sharp,
+                      ),
+                      title: const Text(
+                        'Privacy Policy',
+                        style: TextStyle(),
+                      ),
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // Navigator.pushNamed(context, TermConditionScreen.routeName);
 
-                    final Uri _url = Uri.parse(
-                        'https://dashboard.zatayo.com/privacy-policy');
-                    launchUrl(_url);
-                  },
-                ),
+                        final Uri _url = Uri.parse(
+                            'https://dashboard.zatayo.com/privacy-policy');
+                        launchUrl(_url);
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(
+                        Icons.event_note_sharp,
+                      ),
+                      title: const Text(
+                        'Terms & Conditions',
+                        style: TextStyle(),
+                      ),
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // Navigator.pushNamed(context, TermConditionScreen.routeName);
+                        final Uri url = Uri.parse(
+                            'https://dashboard.zatayo.com/terms-and-conditions');
+                        launchUrl(url);
+                      },
+                    ),
+                  ],
+                )),
                 ListTile(
                   leading: const Icon(
-                    Icons.event_note_sharp,
+                    Icons.person_off,
                   ),
                   title: const Text(
-                    'Terms & Conditions',
+                    ' Delete Profile',
                     style: TextStyle(),
                   ),
                   onTap: () {
-                    // Navigator.pop(context);
-                    // Navigator.pushNamed(context, TermConditionScreen.routeName);
-                    final Uri url = Uri.parse(
-                        'https://dashboard.zatayo.com/terms-and-conditions');
-                    launchUrl(url);
+                    showCustomAlertDialog(
+                        context: context,
+                        contentText: "Are you sure to delete profile ?",
+                        onCancel: () {
+                          context.pop();
+                        },
+                        onConfirm: () {
+                          context.pop();
+                          showSSnackBar(context, "Account deleted successfully",
+                              Colors.red);
+                          GoRouter.of(context).goNamed('enter-phone-number');
+                        });
                   },
                 ),
               ],

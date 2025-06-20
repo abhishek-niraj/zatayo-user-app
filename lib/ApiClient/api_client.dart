@@ -4,7 +4,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:zatayo/utils/app_shared_preference_helper.dart';
 
  const baseUrl = 'https://dashboard.zatayo.com/zatayo-backend/';
- // const baseUrl = 'http://192.168.137.214:9000';
+ // const baseUrl = 'http://192.168.170.214:9000';
 class ApiClient {
   final Dio _dio;
 

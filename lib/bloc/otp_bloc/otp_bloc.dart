@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zatayo/model/common_response_model.dart';
 import 'package:zatayo/model/otp_verify_response_model.dart';
@@ -26,9 +27,12 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       }
     });
     on<VerifyOtp>((event, emit) async {
-      print("-------------");
-      print(event.bodyRequest);
-      print("-------------------");
+      if (kDebugMode) {
+        print("-------------");
+        print(event.bodyRequest);
+        print("-------------------");
+      }
+
       emit(VerifyOtpLoading()); // Emit loading state
       try {
         final responseMap = await apiClient.apiCall(

@@ -21,6 +21,7 @@ import 'cubit/customer_details/user_selected_location_information_cubit.dart';
 import 'cubit/deal_of_day/get_deal_of_day_cubit.dart';
 import 'cubit/fitness/fitness_cubit.dart';
 import 'cubit/home_page_banner/home_page_banner_cubit.dart';
+import 'cubit/skip/user_skip_cubit.dart';
 import 'cubit/sport/get_sport_by_id_cubit.dart';
 import 'cubit/sport/get_sport_cubit.dart';
 import 'cubit/sport/get_top_sport_cubit.dart';
@@ -110,6 +111,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CustomerBasicInformationCubit()),
         BlocProvider(create: (context) => GetMyPlanInformationCubit(apiClient)),
         BlocProvider(create: (context) => SubscriptionPlanActivationCubit(apiClient)),
+        BlocProvider(create: (context) => UserSkipCubit(apiClient)),
 
       ],
       child: MaterialApp.router(
